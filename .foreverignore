@@ -1,0 +1,15 @@
+# Avoid to restart the server when using forever on some file changes.
+
+# General
+**/.idea/**
+**/.git/**
+
+**/src/**
+**/dev.tools/**
+**/node_modules/**
+**/private/**
+**/public/**
+**/mobile/**
+
+
+# !**.js**

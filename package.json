@@ -1,0 +1,39 @@
+{
+  "name": "osnova-react-environment",
+  "author": "Sasha snov Noviel",
+  "description": "OSNOVA application with configured ES2016+ environment (Babel+Webpack) and react for the client",
+  "dependencies": {
+    "osnova": "0.12.0",
+    "osnova-lib": "^1.0.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-loader": "^6.2.10",
+    "babel-preset-latest": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
+    "chokidar": "^1.6.1",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
+    "webpack": "2"
+  },
+  "license": "ISC",
+  "main": "index.js",
+  "private": false,
+  "readme": "README.md",
+  "scripts": {
+    "build": "npm run build-server && npm run build-client",
+    "build-server": "babel src/server -d server --copy-files",
+    "build-client": "webpack --config dev/webpack2.config.js",
+    "watch-client": "webpack --config dev/webpack2.config.js --watch",
+    "watch-server": "babel src/server -d server --watch --copy-files",
+    "forever": "forever -c node -w index.js",
+    "major-release": "npm --no-git-tag-version version major && npm publish",
+    "minor-release": "npm --no-git-tag-version version minor && npm publish",
+    "patch-release": "npm --no-git-tag-version version patch && npm publish",
+    "start": "node index.js",
+    "lint-client:watch": "esw --color -w src/client/**",
+    "lint-server:watch": "esw --color -w src/server/**",
+    "lint:watch": "npm run lint-client:watch && npm run lint-server:watch"
+  },
+  "version": "0.5.1"
+}
