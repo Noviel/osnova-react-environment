@@ -10,14 +10,8 @@ module.exports = function () {
 
   var osnova = (0, _osnova2.default)({
     master: true,
-
     modules: [],
-
-    core: require('./osnova-core-config'),
-
-    start: function start() {
-      console.log('I WAS CALLED FROM MASTER. GZ');
-    }
+    core: require('./osnova-core-config')
   });
 
   /*
@@ -27,5 +21,7 @@ module.exports = function () {
     });
   */
 
-  osnova.start();
+  osnova.start(function () {
+    console.log('I WAS CALLED FROM WORKER. GZ');
+  });
 }; // Created by snov on 19.09.2016.

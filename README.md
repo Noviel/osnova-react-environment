@@ -7,11 +7,11 @@ OSNOVA application with configured ES2016+ environment (Babel+Webpack) and react
 
 ####via git (preferable)
 
-    git clone git@github.com:Noviel/osnova-advanced-application.git <your-application-name>
+    git clone git@github.com:Noviel/osnova-react-environment.git <your-application-name>
 
 ####or via download
 
-    https://github.com/Noviel/osnova-advanced-application/archive/master.zip
+    https://github.com/Noviel/osnova-react-environment/archive/master.zip
   and uznip to new project directory.
 
 ###Prepare

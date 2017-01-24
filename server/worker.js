@@ -24,11 +24,11 @@ module.exports = function () {
 
       osnova.moduleReady();
     }],
-    start: function start() {
-      console.log('I WAS CALLED FROM WORKER. GZ');
-    },
+
     core: require('./osnova-core-config')
   });
 
-  osnova.start();
+  osnova.start(function () {
+    console.log('I WAS CALLED FROM WORKER. GZ');
+  });
 };

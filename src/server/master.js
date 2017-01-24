@@ -6,12 +6,8 @@ module.exports = () => {
 
   const osnova = OSNOVA({
     master: true,
-
     modules: [],
-
-    core: require('./osnova-core-config'),
-
-    start: function() { console.log('I WAS CALLED FROM MASTER. GZ'); }
+    core: require('./osnova-core-config')
   });
 
 /*
@@ -21,5 +17,5 @@ module.exports = () => {
   });
 */
 
-  osnova.start();
+  osnova.start(() => { console.log('I WAS CALLED FROM WORKER. GZ'); });
 };

@@ -3,7 +3,7 @@
 const path    = require('path');
 
 const config = {
-  path: require('../preentry').path,
+  path: require('../root').path,
 
   /*webpack: {
     web: {

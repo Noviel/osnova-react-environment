@@ -28,27 +28,16 @@ const herokuSettings = {
     ip: env.NODE_IP || '0.0.0.0'
   },
   database: {
-    uri: 'mongodb://heroku_dmjt0lw7:imacvsv68kif7j9k47s5ec45u6@ds033966.mlab.com:33966/heroku_dmjt0lw7'
-  }
-};
-
-const openShiftSettings = {
-  threads: 1,
-
-  host: {
-    port: env.NODE_PORT || 8080,
-    ip: env.NODE_IP || '127.0.0.1'
-  },
-  database: {
-    path: env.MONGODB_URL,
-    name: 'dequartum'
+    // https://devcenter.heroku.com/articles/mongolab/
+    // console command:
+    // $ heroku config:get MONGODB_URI -app [your-app-name]
+    uri: 'mongodb://user:passs@x.mlab.com:33966/user'
   }
 };
 
 function getDeployTargetConfig() {
-  if (env.OPENSHIFT_APP_UUID) {
-    return openShiftSettings;
-  } else if (env.ON_HEROKU) {
+  //$ heroku config:set ON_HEROKU=true
+  if (env.ON_HEROKU) {
     return herokuSettings;
   }
 
