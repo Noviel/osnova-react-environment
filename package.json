@@ -3,7 +3,7 @@
   "author": "Sasha snov Noviel",
   "description": "Configured environment for quick start of development react+osnova based application",
   "dependencies": {
-    "osnova": "0.15.2",
+    "osnova": "0.16.0",
     "osnova-lib": "^1.0.3",
     "react": "^15.4.1",
     "react-dom": "^15.4.1"
@@ -14,7 +14,7 @@
     "babel-preset-latest": "^6.16.0",
     "babel-preset-react": "^6.16.0",
     "chokidar": "^1.6.1",
-    "webpack": "2"
+    "webpack": "2.2.0"
   },
   "license": "ISC",
   "main": "index.js",
@@ -36,5 +36,5 @@
     "lint-server:watch": "esw --color -w src/server/**",
     "lint:watch": "npm run lint-client:watch && npm run lint-server:watch"
   },
-  "version": "0.10.1"
+  "version": "0.11.0"
 }

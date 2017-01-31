@@ -10,10 +10,25 @@ module.exports = () => {
       const app = osnova.express;
 
       app.get('*', (req, res) => {
-        res.render('index');
+        res.set('Content-Type', 'text/html');
+
+        res.send(
+`<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+    <script rel="script" src="index.js"></script>
+    <title>Hheh</title>
+</head>
+<body>
+    <div id="app">nu che,potancuem?</div>
+</body>
+</html>`
+        );
+
       });
 
-      osnova.moduleReady();
+      osnova.next();
     }],
 
     core: require('./osnova-core-config')

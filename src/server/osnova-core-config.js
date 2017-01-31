@@ -5,16 +5,16 @@ const path = require('../root').path;
 
 const osnovaCoreConfig = {
   paths: {
-    root: path.root,
-    public: path.public.web,
-    views: path.views
+    absoluteRoot: path.absoluteRoot,
+    static: path.static
   },
-  template: 'pug',
   target: launchConfig,
   session: {
     secret: 'VERYSECRETSTRING'
   },
-  auth: false
+  use: {
+    auth: false
+  }
 };
 
 module.exports = osnovaCoreConfig;

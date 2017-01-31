@@ -4,7 +4,8 @@ const absoluteRoot = path.resolve(__dirname);
 
 module.exports = {
   path: {
-    root: absoluteRoot,
+    absoluteRoot,
+    static: './static/dist',
     public: {
       web: path.resolve(absoluteRoot, './public'),
       mobile: path.resolve(absoluteRoot, './mobile/www')

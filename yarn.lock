@@ -2414,9 +2414,9 @@ osnova-lib, osnova-lib@1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/osnova-lib/-/osnova-lib-1.0.3.tgz#5905980440c0cfa5a4e254b0b7aaf4535a0e0935"
 
-osnova@0.15.2:
-  version "0.15.2"
-  resolved "https://registry.yarnpkg.com/osnova/-/osnova-0.15.2.tgz#03ee02d33fbf9da17d218f61e3ba30ebbd420a18"
+osnova@0.16.0:
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/osnova/-/osnova-0.16.0.tgz#8ccff6f7d5f4ee8ebdfdd173dd9b560b07064231"
   dependencies:
     axon "^2.0.2"
     bcryptjs "^2.3.0"
@@ -3354,7 +3354,7 @@ webpack-sources@^0.1.4:
     source-list-map "~0.1.7"
     source-map "~0.5.3"
 
-webpack@2:
+webpack@2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/webpack/-/webpack-2.2.0.tgz#09246336b5581c9002353f75bcadb598a648f977"
   dependencies:

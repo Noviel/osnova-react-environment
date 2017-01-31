@@ -1,19 +1,19 @@
 // Created by snov on 21.12.2016.
 
 const config = require('./config');
-const root = config.path.root;
+const root = config.path.absoluteRoot;
 const path = require('path');
 
 module.exports = {
   context: root,
 
   entry: {
-    'js/index': './src/client/index.js'
+    'index': './src/client/index.js'
   },
 
   output: {
     filename: '[name].js',
-    path: config.path.public.web,
+    path: config.path.static,
     chunkFilename: '[id].js',
     publicPath: '/'
   },
