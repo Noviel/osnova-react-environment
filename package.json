@@ -3,18 +3,27 @@
   "author": "Sasha snov Noviel",
   "description": "Configured environment for quick start of development react+osnova based application",
   "dependencies": {
-    "osnova": "0.16.0",
+    "osnova": "^0.17.4",
     "osnova-lib": "^1.0.3",
     "react": "^15.4.1",
-    "react-dom": "^15.4.1"
+    "react-dom": "^15.4.1",
+    "react-redux": "^5.0.2",
+    "redux": "^3.6.0"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
     "babel-loader": "^6.2.10",
+    "babel-plugin-transform-class-properties": "^6.22.0",
     "babel-preset-latest": "^6.16.0",
     "babel-preset-react": "^6.16.0",
+    "babel-register": "^6.22.0",
     "chokidar": "^1.6.1",
-    "webpack": "2.2.0"
+    "clean-webpack-plugin": "^0.1.15",
+    "css-loader": "^0.26.1",
+    "extract-text-webpack-plugin": "2.2.0",
+    "style-loader": "^0.13.1",
+    "webpack": "2.2.0",
+    "webpack-manifest-plugin": "^1.1.0"
   },
   "license": "ISC",
   "main": "index.js",
@@ -24,9 +33,9 @@
     "build": "npm run build-server && npm run build-client",
     "build-server": "babel src/server -d server --copy-files",
     "build-client": "webpack --config dev/webpack2.config.js",
-    "watch-client": "webpack --config dev/webpack2.config.js --watch",
+    "watch-client": "webpack --config dev/webpack2.config.js --watch --progress",
     "watch-server": "babel src/server -d server --watch --copy-files",
-    "forever": "forever -c node -w index.js",
+    "nodemon": "nodemon index.js --config dev/nodemon.json",
     "major-release": "npm --no-git-tag-version version major && npm publish",
     "minor-release": "npm --no-git-tag-version version minor && npm publish",
     "patch-release": "npm --no-git-tag-version version patch && npm publish",
@@ -36,5 +45,5 @@
     "lint-server:watch": "esw --color -w src/server/**",
     "lint:watch": "npm run lint-client:watch && npm run lint-server:watch"
   },
-  "version": "0.11.0"
+  "version": "0.12.0"
 }

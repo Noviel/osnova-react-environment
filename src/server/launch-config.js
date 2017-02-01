@@ -16,7 +16,7 @@ const localSettings = {
 
   database: {
     path: 'mongodb://localhost/',
-    name: 'dequartum'
+    name: 'osnova'
   }
 };
 

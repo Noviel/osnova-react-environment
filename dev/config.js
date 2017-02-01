@@ -1,9 +1,13 @@
 // Created by snov on 28.06.2016.
 
-const path    = require('path');
-
 const config = {
-  path: require('../root').path,
+  paths: {
+    absolute: {
+      root: require('../root')
+    },
+    assets: './static/dist'
+  },
+  target: require('../server/launch-config')
 
   /*webpack: {
     web: {

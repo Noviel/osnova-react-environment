@@ -2,15 +2,14 @@
 
 // Created by snov on 13.10.2016.
 
-var launchConfig = require('./launch-config');
-var path = require('../root').path;
-
 var osnovaCoreConfig = {
   paths: {
-    absoluteRoot: path.absoluteRoot,
-    static: path.static
+    absolute: {
+      root: require('../root')
+    },
+    assets: './static/dist/'
   },
-  target: launchConfig,
+  target: require('./launch-config'),
   session: {
     secret: 'VERYSECRETSTRING'
   },
