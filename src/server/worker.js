@@ -10,8 +10,6 @@ module.exports = () => {
   const osnova = OSNOVA({
     modules: [(osnova) => {
       const app = osnova.express;
-      const a = 935;
-
       const manifest = require(path.resolve(osnova.opts.core.paths.absolute.assets, 'manifest.json'));
 
       app.get('*', (req, res) => {

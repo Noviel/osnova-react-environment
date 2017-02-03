@@ -12,6 +12,8 @@ const excludeDirs = /node_modules/;
 const rootPath = config.paths.absolute.root;
 const assetsPath = path.resolve(rootPath, config.paths.assets);
 
+const CSSLocalIdentName = 'localIdentName=[local]--[hash:base64:5]';
+
 module.exports = {
   context: rootPath,
   devtool: 'source-map',
@@ -40,7 +42,7 @@ module.exports = {
         exclude: excludeDirs,
         use: ExtractTextPlugin.extract({
           fallbackLoader: 'style-loader',
-          loader: ['css-loader']
+          loader: [`css-loader?modules&${CSSLocalIdentName}`]
         })
       }
     ]

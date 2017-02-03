@@ -10,12 +10,5 @@ module.exports = () => {
     core: require('./osnova-core-config')
   });
 
-/*
-  osnova.add((osnova) => {
-    const dqnt = new DQNT(osnova);
-    osnova.moduleReady();
-  });
-*/
-
   osnova.start(() => { console.log('I WAS CALLED FROM WORKER. GZ'); });
 };

@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const c = new Sosok();
   console.log(styles, '?????');
   render(
-    <div className='bisque'>IT IS ADVANCED OSNOVA APPLICATION WITH CONFIGURED WEBPACK FOR WORK WITH REACT
+    <div>IT IS ADVANCED OSNOVA APPLICATION WITH CONFIGURED WEBPACK FOR WORK WITH REACT
       <Caption text="OPA OPA OPA PA"/>
     </div>,
     document.getElementById('app')

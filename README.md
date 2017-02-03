@@ -1,7 +1,19 @@
 #OSNOVA ADVANCED APPLICATION
 
 ###bI
-OSNOVA application with configured ES2016+ environment (Babel+Webpack) and react for the client
+ES6+ environment (Babel+Webpack2) for modern react application with OSNOVA-based server.
+
+###Features and components
+
+#### Client-side
+ - babel
+ - webpack
+ - postcss
+ - react
+ - redux
+
+#### Server-side 
+ - osnova
 
 ###Install
 
@@ -20,19 +32,16 @@ OSNOVA application with configured ES2016+ environment (Babel+Webpack) and react
 - `npm install` or `yarn install` for dependencies.
 - Set in `package.json` information about your application.
 
-###Coding
-- Write some cool code in `src/client` and `src/server` folders.
+###Structure
 
-`index.js` in both directories are entry points for client/server.
-This system is server-first in some aspects.
-Common code used at server and at client is treated as more server-side and located in `src/server/common`.
+- `Root`
+  - `root.js` - just a file to determine absolute root directory of a project.
+  - `index.js` - server entry point.
 
 ###Building
+`npm run build-client` and `npm run build-server` or `npm run build` for both.  
 
-- Run `npm run build` to build your revolutionary changes in code.
-
-`Webpack`+`Babel` build and transpile the client code to ES5 and produce a single `client/js/main.js` file,
-and `Babel` transpiles server's code and put it into `server` directory.
+Client code will be bundled by Webpack to `/static/dist` default folder, server code will be transpiled by Babel and putted to `/server`.
 
 ###Testing
 - Run some tests.

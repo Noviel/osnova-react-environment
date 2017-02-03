@@ -1,13 +1,10 @@
 // Created by snov on 28.06.2016.
 
+const coreConfig = require('../server/osnova-core-config');
+
 const config = {
-  paths: {
-    absolute: {
-      root: require('../root')
-    },
-    assets: './static/dist'
-  },
-  target: require('../server/launch-config')
+  paths: coreConfig.paths,
+  target: coreConfig.target
 
   /*webpack: {
     web: {

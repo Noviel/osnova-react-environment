@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
   console.log(_style2.default, '?????');
   (0, _reactDom.render)(_react2.default.createElement(
     'div',
-    { className: 'bisque' },
+    null,
     'IT IS ADVANCED OSNOVA APPLICATION WITH CONFIGURED WEBPACK FOR WORK WITH REACT',
     _react2.default.createElement(_caption2.default, { text: 'OPA OPA OPA PA' })
   ), document.getElementById('app'));
@@ -82,7 +82,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactDom = __webpack_require__(25);
 
-__webpack_require__(83);
+var _style = __webpack_require__(83);
+
+var _style2 = _interopRequireDefault(_style);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -107,7 +109,7 @@ var Caption = function (_Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: 'main' },
+        { className: _style2.default.bisque },
         this.props.text
       );
     }
@@ -138,6 +140,7 @@ exports.default = Caption;
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+module.exports = {"bisque":"bisque--3mZl_"};
 
 /***/ }),
 
@@ -145,8 +148,9 @@ exports.default = Caption;
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+module.exports = {"main":"main--20n9b","bisque":"bisque--1aosv"};
 
 /***/ })
 
 },[180]);
-//# sourceMappingURL=index.203448270126d101ba35.js.map
+//# sourceMappingURL=index.d8b5879d0dd74012264d.js.map

@@ -1,7 +1,7 @@
 // Created by snov on 01.02.2017.
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import './style.css';
+import styles from './style.css';
 
 export default class Caption extends Component {
 
@@ -14,6 +14,6 @@ export default class Caption extends Component {
   };
 
   render() {
-    return (<div className="main">{this.props.text}</div>)
+    return (<div className={styles.bisque}>{this.props.text}</div>)
   }
 }
