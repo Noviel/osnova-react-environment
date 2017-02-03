@@ -1,6 +1,6 @@
 {
   "name": "osnova-react-environment",
-  "author": "Sasha snov Noviel",
+  "author": "Sasha snov Noviel <snov.contact@gmail.com>",
   "description": "ES6+ environment (Babel+Webpack2) for modern react application with OSNOVA-based server",
   "dependencies": {
     "osnova": "^0.17.4",
@@ -45,5 +45,5 @@
     "lint-server:watch": "esw --color -w src/server/**",
     "lint:watch": "npm run lint-client:watch && npm run lint-server:watch"
   },
-  "version": "0.12.1"
+  "version": "0.13.0"
 }

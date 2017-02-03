@@ -1,13 +1,14 @@
-// Created by snov on 13.10.2016.
+// Created by snov on 03.02.2017.
+"use strict";
 
-const osnovaCoreConfig = {
+const config = {
   paths: {
     absolute: {
       root: require('../root')
     },
     assets: './static/dist/'
   },
-  target: require('./launch-config'),
+  target: require('./target'),
   session: {
     secret: 'VERYSECRETSTRING'
   },
@@ -16,4 +17,4 @@ const osnovaCoreConfig = {
   }
 };
 
-module.exports = osnovaCoreConfig;
+module.exports = config;

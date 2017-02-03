@@ -1,7 +1,6 @@
 // Created by snov on 22.06.2016.
 
 import OSNOVA from 'osnova';
-import routes from './routes';
 
 import path from 'path';
 
@@ -37,7 +36,7 @@ module.exports = () => {
       osnova.next();
     }],
 
-    core: require('./osnova-core-config')
+    core: require('../config/core')
   });
 
   osnova.start(() => { console.log('I WAS CALLED FROM WORKER. GZ'); });

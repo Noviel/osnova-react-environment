@@ -4,15 +4,13 @@ var _osnova = require('osnova');
 
 var _osnova2 = _interopRequireDefault(_osnova);
 
-var _routes = require('./routes');
-
-var _routes2 = _interopRequireDefault(_routes);
-
 var _path = require('path');
 
 var _path2 = _interopRequireDefault(_path);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// Created by snov on 22.06.2016.
 
 module.exports = function () {
 
@@ -30,10 +28,10 @@ module.exports = function () {
       osnova.next();
     }],
 
-    core: require('./osnova-core-config')
+    core: require('../config/core')
   });
 
   osnova.start(function () {
     console.log('I WAS CALLED FROM WORKER. GZ');
   });
-}; // Created by snov on 22.06.2016.
+};

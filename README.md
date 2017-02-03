@@ -1,4 +1,4 @@
-#OSNOVA ADVANCED APPLICATION
+#OSNOVA-REACT-ENVIRONMENT
 
 ###bI
 ES6+ environment (Babel+Webpack2) for modern react application with OSNOVA-based server.

@@ -11,7 +11,7 @@ module.exports = function () {
   var osnova = (0, _osnova2.default)({
     master: true,
     modules: [],
-    core: require('./osnova-core-config')
+    core: require('../config/core')
   });
 
   osnova.start(function () {
