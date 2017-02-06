@@ -3,6 +3,7 @@
   "author": "Sasha snov Noviel <snov.contact@gmail.com>",
   "description": "ES6+ environment (Babel+Webpack2) for modern react application with OSNOVA-based server",
   "dependencies": {
+    "better-npm-run": "^0.0.14",
     "osnova": "^0.17.4",
     "osnova-lib": "^1.0.3",
     "react": "^15.4.1",
@@ -23,19 +24,21 @@
     "extract-text-webpack-plugin": "2.2.0",
     "style-loader": "^0.13.1",
     "webpack": "2.2.0",
-    "webpack-manifest-plugin": "^1.1.0"
+    "webpack-manifest-plugin": "^1.1.0",
+    "webpack-node-externals": "^1.5.4"
   },
   "license": "ISC",
-  "main": "index.js",
+  "main": "server/index.js",
   "private": false,
   "readme": "README.md",
   "scripts": {
     "build": "npm run build-server && npm run build-client",
     "build-server": "babel src/server -d server --copy-files",
-    "build-client": "webpack --config dev/webpack2.config.js",
+    "build-server-webpack": "webpack --config dev/webpack2.config.server.js --progress",
+    "build-client": "better-npm-run build:prod",
     "watch-client": "webpack --config dev/webpack2.config.js --watch --progress",
-    "watch-server": "babel src/server -d server --watch --copy-files",
-    "nodemon": "nodemon index.js --config dev/nodemon.json",
+    "watch-server": "better-npm-run watch-server",
+    "nodemon": "nodemon server/index.js --config dev/nodemon.json",
     "major-release": "npm --no-git-tag-version version major && npm publish",
     "minor-release": "npm --no-git-tag-version version minor && npm publish",
     "patch-release": "npm --no-git-tag-version version patch && npm publish",
@@ -45,5 +48,19 @@
     "lint-server:watch": "esw --color -w src/server/**",
     "lint:watch": "npm run lint-client:watch && npm run lint-server:watch"
   },
-  "version": "0.13.0"
+  "betterScripts": {
+    "build:prod": {
+      "command": "webpack --config dev/webpack2.config.js --progress",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "build-server": {
+      "command": "webpack --config dev/webpack2.config.server.js --progress"
+    },
+    "watch-server": {
+      "command": "webpack --config dev/webpack2.config.server.js --progress --watch"
+    }
+  },
+  "version": "0.14.0"
 }

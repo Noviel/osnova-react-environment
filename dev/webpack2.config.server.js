@@ -1,4 +1,8 @@
-// Created by snov on 21.12.2016.
+// Created by snov on 06.02.2017.
+//
+// Configuration for server side rendering.
+//
+/////////////////////////////////////////////////////////////////
 
 const config = require('./config');
 const path = require('path');
@@ -7,10 +11,11 @@ const webpack = require('webpack');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const nodeExternals = require('webpack-node-externals');
 
 const excludeDirs = /node_modules/;
 const rootPath = config.paths.absolute.root;
-const assetsPath = path.resolve(rootPath, config.paths.assets);
+const assetsPath = path.resolve(rootPath, './server/');
 
 console.log(`Preparing Webpack2 config [${process.env.NODE_ENV}]`);
 
@@ -23,19 +28,19 @@ const CSSLoaderString = utils.getCssLoaderConfigString({
 
 module.exports = {
   context: rootPath,
-  devtool: 'source-map',
+  target: 'node',
 
   entry: {
-    index: './src/client/index.js',
-    vendor: ['react', 'react-dom']
+    index: './src/server/index.js'
   },
 
   output: {
-    filename: '[name].[chunkhash].js',
+    filename: '[name].js',
     path: assetsPath,
-    chunkFilename: '[name].[chunkhash].js',
-    publicPath: '/dist/'
+    publicPath: '/'
   },
+
+  externals: [ nodeExternals()],
 
   module: {
     rules: [
@@ -62,21 +67,22 @@ module.exports = {
   },
 
   plugins: [
-    new ExtractTextPlugin({
+    /*new ExtractTextPlugin({
       filename: '[name].[contenthash].css',
       disable: false,
       allChunks: true
-    }),
+    })*/
 
-    new webpack.optimize.CommonsChunkPlugin({
+    //,
+
+    /*new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor', 'manifest'],
       minChunks: function (module) {
         return module.context && module.context.indexOf('node_modules') !== -1;
       }
-    }),
+    }),*/
 
-    new ManifestPlugin(),
-    new CleanWebpackPlugin([assetsPath], { root: rootPath, watch: true })
+    //new CleanWebpackPlugin([assetsPath], { root: rootPath, watch: true })
   ]
 
 };

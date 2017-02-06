@@ -4,7 +4,7 @@
 const config = {
   paths: {
     absolute: {
-      root: require('../root')
+      root: process.cwd()
     },
     assets: './static/dist/'
   },

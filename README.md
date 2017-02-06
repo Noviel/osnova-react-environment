@@ -34,9 +34,11 @@ ES6+ environment (Babel+Webpack2) for modern react application with OSNOVA-based
 
 ###Structure
 
-- `Root`
-  - `root.js` - just a file to determine absolute root directory of a project.
-  - `index.js` - server entry point.
+  Coming soon...
+  
+###Scripts
+  
+  Coming soon...
 
 ###Building
 `npm run build-client` and `npm run build-server` or `npm run build` for both.  

@@ -1,11 +1,11 @@
 // Created by snov on 03.02.2017.
+//
+// deployment to specific platform settings
+//
+/////////////////////////////////////////////////////////////////
 
-const path = require('path');
 const env  = process.env;
 
-//==============================================================
-// deployment to specific platform settings
-//==============================================================
 const localSettings = {
   threads: 1,//require('os').cpus().length,
 
@@ -20,6 +20,9 @@ const localSettings = {
   }
 };
 
+/////////////////////////////////////////////////////////////////
+// for development mode in heroku
+// $ heroku config:set NPM_CONFIG_PRODUCTION=false
 const herokuSettings = {
   threads: 1,
 
