@@ -67,11 +67,11 @@ module.exports = {
   },
 
   plugins: [
-    /*new ExtractTextPlugin({
+    new ExtractTextPlugin({
       filename: '[name].[contenthash].css',
       disable: false,
       allChunks: true
-    })*/
+    }),
 
     //,
 
@@ -82,7 +82,7 @@ module.exports = {
       }
     }),*/
 
-    //new CleanWebpackPlugin([assetsPath], { root: rootPath, watch: true })
+    new CleanWebpackPlugin([assetsPath], { root: rootPath, watch: true })
   ]
 
 };

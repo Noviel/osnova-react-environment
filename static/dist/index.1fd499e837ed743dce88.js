@@ -6,9 +6,6 @@ webpackJsonp([0],{
 "use strict";
 
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); // Created by snov on 27.08.2016.
-
-
 var _react = __webpack_require__(26);
 
 var _react2 = _interopRequireDefault(_react);
@@ -25,39 +22,16 @@ var _style2 = _interopRequireDefault(_style);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Sosok = function () {
-  _createClass(Sosok, null, [{
-    key: 'message',
-    value: function message() {
-      return Sosok.obs;
-    }
-  }]);
-
-  function Sosok() {
-    var what = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'that!';
-
-    _classCallCheck(this, Sosok);
-  }
-
-  return Sosok;
-}();
-
-Object.defineProperty(Sosok, 'obs', {
-  enumerable: true,
-  writable: true,
-  value: { value: 1800 }
-});
-
-
+// Created by snov on 27.08.2016.
 document.addEventListener('DOMContentLoaded', function () {
-  var c = new Sosok();
-  console.log(_style2.default, '?????');
   (0, _reactDom.render)(_react2.default.createElement(
     'div',
     null,
-    'IT IS ADVANCED OSNOVA APPLICATION WITH CONFIGURED WEBPACK FOR WORK WITH REACT',
+    _react2.default.createElement(
+      'div',
+      { className: _style2.default.main },
+      'Hello :)'
+    ),
     _react2.default.createElement(_caption2.default, { text: 'OPA OPA OPA PA' })
   ), document.getElementById('app'));
 });
@@ -140,7 +114,7 @@ exports.default = Caption;
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-module.exports = {"bisque":"bisque--3mZl_"};
+module.exports = {"main":"main--24h2g"};
 
 /***/ }),
 
@@ -153,4 +127,4 @@ module.exports = {"main":"main--20n9b","bisque":"bisque--1aosv"};
 /***/ })
 
 },[180]);
-//# sourceMappingURL=index.d8b5879d0dd74012264d.js.map
+//# sourceMappingURL=index.1fd499e837ed743dce88.js.map
