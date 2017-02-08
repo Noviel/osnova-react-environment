@@ -4,7 +4,7 @@
   "description": "ES6+ environment (Babel+Webpack2) for modern react application with OSNOVA-based server",
   "dependencies": {
     "better-npm-run": "^0.0.14",
-    "osnova": "^0.17.9",
+    "osnova": "^0.17.10",
     "osnova-lib": "^1.0.3",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
@@ -21,6 +21,7 @@
     "babel-register": "^6.22.0",
     "chokidar": "^1.6.1",
     "clean-webpack-plugin": "^0.1.15",
+    "concurrently": "^3.1.0",
     "css-loader": "^0.26.1",
     "extract-text-webpack-plugin": "2.2.0",
     "file-loader": "^0.10.0",
@@ -42,11 +43,11 @@
   "readme": "README.md",
   "scripts": {
     "build": "npm run build-server && npm run build-client",
-    "build-server": "babel src/server -d server --copy-files",
-    "build-server-webpack": "webpack --config dev/webpack2.config.server.js --progress",
-    "build-client": "better-npm-run build:prod",
+    "build-server": "better-npm-run build-server",
+    "build-client": "better-npm-run build-client",
     "watch-client": "better-npm-run watch-client",
     "watch-server": "better-npm-run watch-server",
+    "watch": "concurrently -k \"npm run watch-client\" \"npm run watch-server\"",
     "nodemon": "nodemon server/index.js --config dev/nodemon.json",
     "major-release": "npm --no-git-tag-version version major && npm publish",
     "minor-release": "npm --no-git-tag-version version minor && npm publish",
@@ -55,14 +56,15 @@
     "start": "node server/index.js",
     "lint-client:watch": "esw --color -w src/client/**",
     "lint-server:watch": "esw --color -w src/server/**",
-    "lint:watch": "npm run lint-client:watch && npm run lint-server:watch"
+    "lint:watch": "npm run lint-client:watch && npm run lint-server:watch",
+    "prepublish": "npm run build"
   },
   "betterScripts": {
     "build-server": {
-      "command": "webpack --config dev/webpack2.config.server.js --progress"
-    },
-    "watch-server": {
-      "command": "better-npm-run build-server --watch"
+      "command": "webpack --config dev/webpack2.config.server.js --progress",
+      "env": {
+        "NODE_ENV": "production"
+      }
     },
     "build-client": {
       "command": "webpack --config dev/webpack2.config.client.js --progress",
@@ -70,9 +72,12 @@
         "NODE_ENV": "production"
       }
     },
+    "watch-server": {
+      "command": "better-npm-run build-server --watch --colors"
+    },
     "watch-client": {
-      "command": "better-npm-run build-client --watch"
+      "command": "better-npm-run build-client --watch --colors"
     }
   },
-  "version": "0.15.3"
+  "version": "0.17.0"
 }
