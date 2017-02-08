@@ -234,7 +234,7 @@ var webpackGeneratedHtml2 = function webpackGeneratedHtml2(opts) {
     app.get('*', function (req, res) {
       res.set('Content-Type', 'text/html');
 
-      res.send('<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <link rel="stylesheet" type="text/css" href=' + ('dist/' + manifest['index.css']) + '>\n  <script rel="script" src=' + ('dist/' + manifest['manifest.js']) + '></script>\n  <script rel="script" src=' + ('dist/' + manifest['vendor.js']) + '></script>\n  <script rel="script" src=' + ('dist/' + manifest['index.js']) + '></script>\n  <title>Osnova-react-environment application</title>\n</head>\n<body>\n    <div id="app"></div>\n    ' + (0, _server.renderToString)(_react2.default.createElement(_caption2.default, { text: 'I am rendered on the server!' })) + '\n    ' + (0, _server.renderToString)(_react2.default.createElement('img', { src: 'image.jpg' })) + '\n</body>\n</html>');
+      res.send('<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <link rel="stylesheet" type="text/css" href=' + ('dist/' + manifest['index.css']) + '>\n  <script rel="script" src=' + ('dist/' + manifest['manifest.js']) + '></script>\n  <script rel="script" src=' + ('dist/' + manifest['vendor.js']) + '></script>\n  <script rel="script" src=' + ('dist/' + manifest['index.js']) + '></script>\n  <title>Osnova-react-environment application</title>\n</head>\n<body>\n    <div id="app"></div>\n    ' + (0, _server.renderToString)(_react2.default.createElement(_caption2.default, { text: 'hello?' })) + '\n</body>\n</html>');
     });
 
     osnova.next();
@@ -342,8 +342,9 @@ exports.default = Caption;
 /* 7 */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
-module.exports = {"caption":"caption--3HO5B"};
+module.exports = {
+	"caption": "caption--3HO5B"
+};
 
 /***/ }),
 /* 8 */

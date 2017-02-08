@@ -11,6 +11,14 @@
     "boilerplate",
     "osnova"
   ],
+  "license": "MIT",
+  "main": "server/index.js",
+  "private": false,
+  "readme": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Noviel/osnova-react-environment.git"
+  },
   "dependencies": {
     "better-npm-run": "^0.0.14",
     "osnova": "^0.17.10",
@@ -45,14 +53,6 @@
     "webpack": "2.2.0",
     "webpack-manifest-plugin": "^1.1.0",
     "webpack-node-externals": "^1.5.4"
-  },
-  "license": "MIT",
-  "main": "server/index.js",
-  "private": false,
-  "readme": "README.md",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Noviel/osnova-react-environment.git"
   },
   "scripts": {
     "build": "npm run build-server && npm run build-client",
@@ -92,5 +92,5 @@
       "command": "better-npm-run build-client --watch --colors"
     }
   },
-  "version": "0.17.2"
+  "version": "0.17.3"
 }

@@ -12,8 +12,6 @@ const excludeDirs = /node_modules/;
 const rootPath = config.paths.absolute.root;
 const assetsPath = path.resolve(rootPath, config.paths.assets, './dist/');
 
-console.log(`Preparing Webpack2 config [${process.env.NODE_ENV}]`);
-
 const { CSSLocalIdentName } = require('./webpack/utils');
 
 module.exports = {

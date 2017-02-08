@@ -31,8 +31,7 @@ const webpackGeneratedHtml2 = (opts) => (osnova) => {
 </head>
 <body>
     <div id="app"></div>
-    ${renderToString(<Caption text="I am rendered on the server!"/>)}
-    ${renderToString(<img src="image.jpg"/>)}
+    ${renderToString(<Caption text="hello?"/>)}
 </body>
 </html>`
     );

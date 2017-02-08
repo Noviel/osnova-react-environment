@@ -17,8 +17,6 @@ const excludeDirs = /node_modules/;
 const rootPath = config.paths.absolute.root;
 const assetsPath = path.resolve(rootPath, './server/');
 
-console.log(`Preparing Webpack2 config [${process.env.NODE_ENV}]`);
-
 const { CSSLocalIdentName } = require('./webpack/utils');
 
 module.exports = {
@@ -35,7 +33,7 @@ module.exports = {
     publicPath: '/'
   },
 
-  externals: [ nodeExternals()],
+  externals: [nodeExternals()],
 
   module: {
     rules: [
@@ -47,22 +45,19 @@ module.exports = {
       {
         test: /\.css$/,
         exclude: excludeDirs,
-        loader: ExtractTextPlugin.extract({
-          fallbackLoader: 'style-loader',
-          loader: [
-            {
-              loader: 'css-loader',
-              options: {
-                modules: true,
-                localIdentName: CSSLocalIdentName
-              }
-            },
-            {
-              loader: 'postcss-loader',
-              options: require('./postcss.config')
+        loader: [
+          {
+            loader: 'css-loader/locals',
+            options: {
+              modules: true,
+              localIdentName: CSSLocalIdentName
             }
-          ]
-        })
+          },
+          {
+            loader: 'postcss-loader',
+            options: require('./postcss.config')
+          }
+        ]
       },
       {
         test: /\.(gif|jpe?g|tiff|png)$/i,
@@ -82,11 +77,11 @@ module.exports = {
   },
 
   plugins: [
-    new ExtractTextPlugin({
+    /*new ExtractTextPlugin({
       filename: 'css/[name].[contenthash].css',
       disable: false,
       allChunks: true
-    }),
+    }),*/
 
     /*new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor', 'manifest'],
