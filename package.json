@@ -41,6 +41,10 @@
   "main": "server/index.js",
   "private": false,
   "readme": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Noviel/osnova-react-environment.git"
+  },
   "scripts": {
     "build": "npm run build-server && npm run build-client",
     "build-server": "better-npm-run build-server",
@@ -79,5 +83,5 @@
       "command": "better-npm-run build-client --watch --colors"
     }
   },
-  "version": "0.17.0"
+  "version": "0.17.1"
 }
