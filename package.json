@@ -1,6 +1,6 @@
 {
   "name": "osnova-react-environment",
-  "author": "Sasha snov Noviel <snov.contact@gmail.com>",
+  "author": "Aleksandr snov Noviel <snov.contact@gmail.com>",
   "description": "ES6+ environment (Babel+Webpack2) for modern react application with OSNOVA-based server",
   "dependencies": {
     "better-npm-run": "^0.0.14",
@@ -36,7 +36,7 @@
     "webpack-manifest-plugin": "^1.1.0",
     "webpack-node-externals": "^1.5.4"
   },
-  "license": "ISC",
+  "license": "MIT",
   "main": "server/index.js",
   "private": false,
   "readme": "README.md",
@@ -74,5 +74,5 @@
       "command": "better-npm-run build-client --watch"
     }
   },
-  "version": "0.15.2"
+  "version": "0.15.3"
 }
