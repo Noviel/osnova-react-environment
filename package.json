@@ -2,6 +2,15 @@
   "name": "osnova-react-environment",
   "author": "Aleksandr snov Noviel <snov.contact@gmail.com>",
   "description": "ES6+ environment (Babel+Webpack2) for modern react application with OSNOVA-based server",
+  "keywords": [
+    "webpack",
+    "babel",
+    "es6",
+    "react",
+    "redux",
+    "boilerplate",
+    "osnova"
+  ],
   "dependencies": {
     "better-npm-run": "^0.0.14",
     "osnova": "^0.17.10",
@@ -83,5 +92,5 @@
       "command": "better-npm-run build-client --watch --colors"
     }
   },
-  "version": "0.17.1"
+  "version": "0.17.2"
 }
