@@ -19,12 +19,7 @@ const assetsPath = path.resolve(rootPath, './server/');
 
 console.log(`Preparing Webpack2 config [${process.env.NODE_ENV}]`);
 
-const utils = require('./webpack/utils');
-
-const CSSLoaderString = utils.getCssLoaderConfigString({
-  modules: true,
-  local: true
-});
+const { CSSLocalIdentName } = require('./webpack/utils');
 
 module.exports = {
   context: rootPath,
@@ -52,10 +47,27 @@ module.exports = {
       {
         test: /\.css$/,
         exclude: excludeDirs,
-        use: ExtractTextPlugin.extract({
+        loader: ExtractTextPlugin.extract({
           fallbackLoader: 'style-loader',
-          loader: [CSSLoaderString]
+          loader: [
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+                localIdentName: CSSLocalIdentName
+              }
+            },
+            {
+              loader: 'postcss-loader',
+              options: require('./postcss.config')
+            }
+          ]
         })
+      },
+      {
+        test: /\.(gif|jpe?g|tiff|png)$/i,
+        exclude: excludeDirs,
+        loader: 'url-loader?limit=10000'
       }
     ]
   },
@@ -64,16 +76,17 @@ module.exports = {
     modules: [
       'node_modules', path.resolve(rootPath, 'src')
     ]
+    // ,alias: {
+    //   reactDOMServer: 'react-dom/server'
+    // }
   },
 
   plugins: [
     new ExtractTextPlugin({
-      filename: '[name].[contenthash].css',
+      filename: 'css/[name].[contenthash].css',
       disable: false,
       allChunks: true
     }),
-
-    //,
 
     /*new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor', 'manifest'],

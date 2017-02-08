@@ -6,7 +6,7 @@ const config = {
     absolute: {
       root: process.cwd()
     },
-    assets: './static/dist/'
+    assets: './static/'
   },
   target: require('./target'),
   session: {

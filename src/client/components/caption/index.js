@@ -14,6 +14,9 @@ export default class Caption extends Component {
   };
 
   render() {
-    return (<div className={styles.bisque}>{this.props.text}</div>)
+    return (
+      <div className={styles.caption}>{this.props.text}
+      </div>
+    )
   }
 }

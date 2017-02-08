@@ -4,17 +4,8 @@
 //
 /////////////////////////////////////////////////////////////////
 
-const CSSLocalIdentName = 'localIdentName=[local]--[hash:base64:5]';
+const CSSLocalIdentName = '[local]--[hash:base64:5]';
 
 module.exports = {
-
-  getCssLoaderConfigString: opts => {
-    const props = [
-      opts.modules ? 'modules' : '',
-      opts.local ? CSSLocalIdentName : ''
-    ];
-
-    return `css-loader?`.concat(props.join('&'));
-
-  }
+  CSSLocalIdentName
 };

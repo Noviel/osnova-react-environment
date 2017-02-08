@@ -1,7 +1,4 @@
-.main {
-    background: darkgoldenrod;
-}
-
-.bisque {
-    background: bisque;
+.caption {
+    background: greenyellow;
+    border: 8px;
 }

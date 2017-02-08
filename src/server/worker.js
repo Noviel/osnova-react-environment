@@ -4,10 +4,16 @@ import OSNOVA from 'osnova';
 import path from 'path';
 import fs from 'fs';
 
+import React from 'react';
+import reactDOM, { renderToString } from 'react-dom/server';
+
+import Caption from '../client/components/caption';
+
 const webpackGeneratedHtml2 = (opts) => (osnova) => {
   const app = osnova.express;
   const assetsPath = osnova.opts.core.paths.assets;
-  const manifest = JSON.parse(fs.readFileSync(path.resolve(assetsPath, 'manifest.json'), 'utf8'));
+  const manifest = JSON.parse(fs.readFileSync(path.resolve(assetsPath, './dist/manifest.json'), 'utf8'));
+
 
   app.get('*', (req, res) => {
     res.set('Content-Type', 'text/html');
@@ -17,14 +23,16 @@ const webpackGeneratedHtml2 = (opts) => (osnova) => {
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" type="text/css" href=${manifest['index.css']}>
-  <script rel="script" src=${manifest['manifest.js']}></script>
-  <script rel="script" src=${manifest['vendor.js']}></script>
-  <script rel="script" src=${manifest['index.js']}></script>
+  <link rel="stylesheet" type="text/css" href=${'dist/'+manifest['index.css']}>
+  <script rel="script" src=${'dist/'+manifest['manifest.js']}></script>
+  <script rel="script" src=${'dist/'+manifest['vendor.js']}></script>
+  <script rel="script" src=${'dist/'+manifest['index.js']}></script>
   <title>Osnova-react-environment application</title>
 </head>
 <body>
     <div id="app"></div>
+    ${renderToString(<Caption text="I am rendered on the server, wow!"/>)}
+    ${renderToString(<img src="image.jpg"/>)}
 </body>
 </html>`
     );
@@ -33,10 +41,23 @@ const webpackGeneratedHtml2 = (opts) => (osnova) => {
   osnova.next();
 };
 
+const SocketEvents = (osnova) => {
+  const io = osnova.io;
+  if (io === undefined) {
+    throw new Error('osnova.io is undefined. Turn on osnova-module-socket!');
+  }
+
+  io.on('client-message', (socket, payload) => {
+   console.log('Recieved from client: ' + payload);
+  });
+
+  osnova.next();
+};
+
 module.exports = () => {
 
   const osnova = OSNOVA({
-    modules: [webpackGeneratedHtml2()],
+    modules: [webpackGeneratedHtml2(), SocketEvents],
 
     core: require('../../config/core')
   });

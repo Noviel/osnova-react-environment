@@ -10,16 +10,11 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const excludeDirs = /node_modules/;
 const rootPath = config.paths.absolute.root;
-const assetsPath = path.resolve(rootPath, config.paths.assets);
+const assetsPath = path.resolve(rootPath, config.paths.assets, './dist/');
 
 console.log(`Preparing Webpack2 config [${process.env.NODE_ENV}]`);
 
-const utils = require('./webpack/utils');
-
-const CSSLoaderString = utils.getCssLoaderConfigString({
-  modules: true,
-  local: true
-});
+const { CSSLocalIdentName } = require('./webpack/utils');
 
 module.exports = {
   context: rootPath,
@@ -47,10 +42,27 @@ module.exports = {
       {
         test: /\.css$/,
         exclude: excludeDirs,
-        use: ExtractTextPlugin.extract({
+        loader: ExtractTextPlugin.extract({
           fallbackLoader: 'style-loader',
-          loader: [CSSLoaderString]
+          loader: [
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+                localIdentName: CSSLocalIdentName
+              }
+            },
+            {
+              loader: 'postcss-loader',
+              options: require('./postcss.config')
+            }
+          ]
         })
+      },
+      {
+        test: /\.(gif|jpe?g|tiff|png)$/i,
+        exclude: excludeDirs,
+        loader: 'url-loader?limit=10000'
       }
     ]
   },

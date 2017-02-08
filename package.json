@@ -4,7 +4,7 @@
   "description": "ES6+ environment (Babel+Webpack2) for modern react application with OSNOVA-based server",
   "dependencies": {
     "better-npm-run": "^0.0.14",
-    "osnova": "^0.17.4",
+    "osnova": "^0.17.9",
     "osnova-lib": "^1.0.3",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
@@ -12,6 +12,7 @@
     "redux": "^3.6.0"
   },
   "devDependencies": {
+    "autoprefixer": "^6.7.2",
     "babel-cli": "^6.18.0",
     "babel-loader": "^6.2.10",
     "babel-plugin-transform-class-properties": "^6.22.0",
@@ -22,7 +23,15 @@
     "clean-webpack-plugin": "^0.1.15",
     "css-loader": "^0.26.1",
     "extract-text-webpack-plugin": "2.2.0",
+    "file-loader": "^0.10.0",
+    "postcss-autoreset": "^1.2.1",
+    "postcss-import": "^9.1.0",
+    "postcss-initial": "^1.5.3",
+    "postcss-loader": "^1.2.2",
+    "postcss-use": "^2.3.0",
+    "precss": "^1.4.0",
     "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
     "webpack": "2.2.0",
     "webpack-manifest-plugin": "^1.1.0",
     "webpack-node-externals": "^1.5.4"
@@ -65,5 +74,5 @@
       "command": "better-npm-run build-client --watch"
     }
   },
-  "version": "0.14.2"
+  "version": "0.15.2"
 }

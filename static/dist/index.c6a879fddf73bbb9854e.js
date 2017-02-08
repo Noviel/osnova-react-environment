@@ -1,44 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 180:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _react = __webpack_require__(26);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactDom = __webpack_require__(25);
-
-var _caption = __webpack_require__(81);
-
-var _caption2 = _interopRequireDefault(_caption);
-
-var _style = __webpack_require__(82);
-
-var _style2 = _interopRequireDefault(_style);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// Created by snov on 27.08.2016.
-document.addEventListener('DOMContentLoaded', function () {
-  (0, _reactDom.render)(_react2.default.createElement(
-    'div',
-    null,
-    _react2.default.createElement(
-      'div',
-      { className: _style2.default.main },
-      'Hello :)'
-    ),
-    _react2.default.createElement(_caption2.default, { text: 'OPA OPA OPA PA' })
-  ), document.getElementById('app'));
-});
-
-/***/ }),
-
-/***/ 81:
+/***/ 106:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -50,13 +12,13 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(26);
+var _react = __webpack_require__(28);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(25);
+var _reactDom = __webpack_require__(27);
 
-var _style = __webpack_require__(83);
+var _style = __webpack_require__(123);
 
 var _style2 = _interopRequireDefault(_style);
 
@@ -83,7 +45,7 @@ var Caption = function (_Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: _style2.default.bisque },
+        { className: _style2.default.caption },
         this.props.text
       );
     }
@@ -110,7 +72,7 @@ exports.default = Caption;
 
 /***/ }),
 
-/***/ 82:
+/***/ 107:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
@@ -118,13 +80,65 @@ module.exports = {"main":"main--24h2g"};
 
 /***/ }),
 
-/***/ 83:
+/***/ 123:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-module.exports = {"main":"main--20n9b","bisque":"bisque--1aosv"};
+module.exports = {"caption":"caption--3HO5B"};
+
+/***/ }),
+
+/***/ 232:
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
+/***/ }),
+
+/***/ 233:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _react = __webpack_require__(28);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = __webpack_require__(27);
+
+var _caption = __webpack_require__(106);
+
+var _caption2 = _interopRequireDefault(_caption);
+
+var _style = __webpack_require__(107);
+
+var _style2 = _interopRequireDefault(_style);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// Created by snov on 27.08.2016.
+var io = __webpack_require__(108);
+var socket = null;
+
+document.addEventListener('DOMContentLoaded', function () {
+
+  socket = io('');
+  socket.emit('client-message', 'Priffki :****');
+
+  (0, _reactDom.render)(_react2.default.createElement(
+    'div',
+    null,
+    _react2.default.createElement(
+      'div',
+      { className: _style2.default.main },
+      'Hello :)'
+    ),
+    _react2.default.createElement(_caption2.default, { text: 'OPA OPA OPA PA' })
+  ), document.getElementById('app'));
+});
 
 /***/ })
 
-},[180]);
-//# sourceMappingURL=index.1fd499e837ed743dce88.js.map
+},[233]);
+//# sourceMappingURL=index.c6a879fddf73bbb9854e.js.map

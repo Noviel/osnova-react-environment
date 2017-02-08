@@ -1,3 +1,5 @@
+0. ^osnova concepts
+0.1 ^osnova core modules
 1. +redux store
 2. +react-router
 3. server side rendering

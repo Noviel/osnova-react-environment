@@ -1,6 +1,6 @@
 // Created by snov on 21.09.2016.
 
-var postCSSConfig = [
+const postCSSConfig = [
   require('postcss-use')({
     modules: [
       /* autoprefix for different browser vendors */
@@ -32,10 +32,22 @@ var postCSSConfig = [
       //     node.warn(result, 'Unknown variable ' + name)
       //   }
       // }),
-      /* PostCSS plugin for making calculations with math.js  */
-      require('postcss-math')
   ]}),
 ];
 
 // Export the PostCSS Config for usage in webpack
-module.exports = postCSSConfig;
+module.exports = {
+  plugins: [
+    require('autoprefixer'),
+    require('precss'),
+    /* reset inherited rules */
+    require('postcss-autoreset')({
+      reset: 'initial'
+    }),
+    require('postcss-initial')({
+      reset: 'inherited' // reset only inherited rules
+    }),
+    /* enable css @imports like Sass/Less */
+    require('postcss-import'),
+  ]
+};
