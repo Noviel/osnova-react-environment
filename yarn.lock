@@ -3009,9 +3009,9 @@ os-tmpdir@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/os-tmpdir/-/os-tmpdir-1.0.2.tgz#bbe67406c79aa85c5cfec766fe5734555dfa1274"
 
-osnova-cluster-launcher@^1.2.3:
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/osnova-cluster-launcher/-/osnova-cluster-launcher-1.2.3.tgz#5758f6fad22342ba15f18cce61e1b916c43c2541"
+osnova-cluster-launcher@^1.10.0:
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/osnova-cluster-launcher/-/osnova-cluster-launcher-1.10.0.tgz#e877c6ae7b28783841afdb4455fdffd988667dc7"
   dependencies:
     osnova-lib "^1.1.0"
 
@@ -3023,9 +3023,9 @@ osnova-lib@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/osnova-lib/-/osnova-lib-1.1.0.tgz#2dd1a0665f7f934cee5d70bf9a65e38bc0cf5297"
 
-osnova@^0.20.2:
-  version "0.20.2"
-  resolved "https://registry.yarnpkg.com/osnova/-/osnova-0.20.2.tgz#75d10f0114849a45e38268d07a39f2c55f333981"
+osnova@^0.20.4:
+  version "0.20.4"
+  resolved "https://registry.yarnpkg.com/osnova/-/osnova-0.20.4.tgz#0fe0a9191047b4f4665ae3434bfe7aa7ccf3d7c1"
   dependencies:
     axon "^2.0.2"
     bcryptjs "^2.3.0"

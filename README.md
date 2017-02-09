@@ -29,8 +29,8 @@ ES6+ environment (Babel+Webpack2) for modern react application with OSNOVA-based
 ###Prepare
 - Go to `<your-application-name>` root directory.
 - Delete `.git` directory.
-- `npm install` or `yarn install` for dependencies.
 - Set in `package.json` information about your application.
+- `npm install` or `yarn install` for dependencies.
 
 ###Structure
 

@@ -178,18 +178,14 @@ module.exports = require("react");
 /////////////////////////////////////////////////////////////////
 
 var _require = __webpack_require__(10),
-    launch = _require.launch,
-    stickyListenWorker = _require.stickyListenWorker,
-    stickyListenMaster = _require.stickyListenMaster;
+    launch = _require.launch;
 
 launch({
   worker: {
-    main: __webpack_require__(7),
-    listen: stickyListenWorker
+    main: __webpack_require__(7)
   },
   master: {
-    main: __webpack_require__(6),
-    listen: stickyListenMaster
+    main: __webpack_require__(6)
   },
   config: __webpack_require__(1)
 });
@@ -278,12 +274,13 @@ var _osnova2 = _interopRequireDefault(_osnova);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-module.exports = function () {
+module.exports = function (listen) {
 
   var osnova = (0, _osnova2.default)({
     master: true,
     modules: [],
-    core: __webpack_require__(0)
+    core: __webpack_require__(0),
+    listen: listen
   });
 
   osnova.start(function () {
@@ -349,13 +346,12 @@ var SocketEvents = function SocketEvents(osnova) {
   }
 
   io.on('client-message', function (socket, payload) {
-    console.log('Recieved from client: ' + payload);
+    console.log('Received from the client: ' + payload);
   });
 
   osnova.next();
 };
 
-// worker gets listen function from osnova-cluster-launcher(.worker.listen)
 module.exports = function (listen) {
 
   var osnova = (0, _osnova2.default)({

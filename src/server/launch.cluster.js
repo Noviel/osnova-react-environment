@@ -4,20 +4,14 @@
 //
 /////////////////////////////////////////////////////////////////
 
-const {
-  launch,
-  stickyListenWorker,
-  stickyListenMaster
-} = require('osnova-cluster-launcher');
+const { launch } = require('osnova-cluster-launcher');
 
 launch({
   worker: {
-    main: require('./worker'),
-    listen: stickyListenWorker
+    main: require('./worker')
   },
   master: {
-    main: require('./master'),
-    listen: stickyListenMaster
+    main: require('./master')
   },
   config: require('../../config/target')
 });

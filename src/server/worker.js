@@ -47,13 +47,12 @@ const SocketEvents = (osnova) => {
   }
 
   io.on('client-message', (socket, payload) => {
-   console.log('Recieved from client: ' + payload);
+   console.log('Received from the client: ' + payload);
   });
 
   osnova.next();
 };
 
-// worker gets listen function from osnova-cluster-launcher(.worker.listen)
 module.exports = (listen) => {
 
   const osnova = OSNOVA({

@@ -2,12 +2,13 @@
 
 import OSNOVA from 'osnova';
 
-module.exports = () => {
+module.exports = (listen) => {
 
   const osnova = OSNOVA({
     master: true,
     modules: [],
-    core: require('../../config/core')
+    core: require('../../config/core'),
+    listen
   });
 
   osnova.start(() => { console.log('I WAS CALLED FROM WORKER. GZ'); });
