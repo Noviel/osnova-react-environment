@@ -21,7 +21,8 @@
   },
   "dependencies": {
     "better-npm-run": "^0.0.14",
-    "osnova": "^0.17.10",
+    "osnova": "^0.19.0",
+    "osnova-cluster-launcher": "^1.2.3",
     "osnova-lib": "^1.0.3",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
@@ -92,5 +93,5 @@
       "command": "better-npm-run build-client --watch --colors"
     }
   },
-  "version": "0.17.3"
+  "version": "0.18.0"
 }

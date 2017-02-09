@@ -53,13 +53,16 @@ const SocketEvents = (osnova) => {
   osnova.next();
 };
 
-module.exports = () => {
+module.exports = (listen) => {
 
   const osnova = OSNOVA({
     modules: [webpackGeneratedHtml2(), SocketEvents],
 
-    core: require('../../config/core')
+    core: require('../../config/core'),
+    listen
   });
 
-  osnova.start(() => { console.log('I WAS CALLED FROM WORKER. GZ'); });
+  osnova.start(() => {
+    console.log('I WAS CALLED FROM WORKER. GZ');
+  });
 };

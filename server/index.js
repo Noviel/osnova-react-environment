@@ -63,14 +63,14 @@
 /******/ 	__webpack_require__.p = "/";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 12);
+/******/ 	return __webpack_require__(__webpack_require__.s = 13);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
 /***/ (function(module, exports) {
 
-module.exports = require("osnova");
+module.exports = require("osnova-cluster-launcher");
 
 /***/ }),
 /* 1 */
@@ -88,7 +88,7 @@ module.exports = require("osnova");
 var env = process.env;
 
 var localSettings = {
-  threads: 1, //require('os').cpus().length,
+  threads: 2, //require('os').cpus().length,
 
   host: {
     port: env.NODE_PORT || 3333,
@@ -162,16 +162,22 @@ module.exports = config;
 /* 3 */
 /***/ (function(module, exports) {
 
-module.exports = require("react");
+module.exports = require("osnova");
 
 /***/ }),
 /* 4 */
+/***/ (function(module, exports) {
+
+module.exports = require("react");
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _osnova = __webpack_require__(0);
+var _osnova = __webpack_require__(3);
 
 var _osnova2 = _interopRequireDefault(_osnova);
 
@@ -191,33 +197,33 @@ module.exports = function () {
 }; // Created by snov on 19.09.2016.
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _osnova = __webpack_require__(0);
+var _osnova = __webpack_require__(3);
 
 var _osnova2 = _interopRequireDefault(_osnova);
 
-var _path = __webpack_require__(9);
+var _path = __webpack_require__(10);
 
 var _path2 = _interopRequireDefault(_path);
 
-var _fs = __webpack_require__(8);
+var _fs = __webpack_require__(9);
 
 var _fs2 = _interopRequireDefault(_fs);
 
-var _react = __webpack_require__(3);
+var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _server = __webpack_require__(11);
+var _server = __webpack_require__(12);
 
 var _server2 = _interopRequireDefault(_server);
 
-var _caption = __webpack_require__(6);
+var _caption = __webpack_require__(7);
 
 var _caption2 = _interopRequireDefault(_caption);
 
@@ -254,12 +260,13 @@ var SocketEvents = function SocketEvents(osnova) {
   osnova.next();
 };
 
-module.exports = function () {
+module.exports = function (listen) {
 
   var osnova = (0, _osnova2.default)({
     modules: [webpackGeneratedHtml2(), SocketEvents],
 
-    core: __webpack_require__(2)
+    core: __webpack_require__(2),
+    listen: listen
   });
 
   osnova.start(function () {
@@ -268,7 +275,7 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -280,13 +287,13 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(3);
+var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(10);
+var _reactDom = __webpack_require__(11);
 
-var _style = __webpack_require__(7);
+var _style = __webpack_require__(8);
 
 var _style2 = _interopRequireDefault(_style);
 
@@ -339,7 +346,7 @@ Object.defineProperty(Caption, 'defaultProps', {
 exports.default = Caption;
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -347,31 +354,31 @@ module.exports = {
 };
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports) {
 
 module.exports = require("fs");
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports) {
 
 module.exports = require("path");
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-dom");
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-dom/server");
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -379,11 +386,22 @@ module.exports = require("react-dom/server");
 
 // Created by snov on 28.06.2016.
 
-var launch = __webpack_require__(0).launch;
+var _require = __webpack_require__(0),
+    launch = _require.launch,
+    stickyListenWorker = _require.stickyListenWorker,
+    stickyListenMaster = _require.stickyListenMaster;
+
+console.log(__webpack_require__(0));
 
 launch({
-  worker: __webpack_require__(5),
-  master: __webpack_require__(4),
+  worker: {
+    main: __webpack_require__(6),
+    listen: stickyListenWorker
+  },
+  master: {
+    main: __webpack_require__(5),
+    listen: stickyListenMaster
+  },
   config: __webpack_require__(1)
 });
 

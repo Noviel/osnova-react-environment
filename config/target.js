@@ -7,7 +7,7 @@
 const env  = process.env;
 
 const localSettings = {
-  threads: 1,//require('os').cpus().length,
+  threads: 2,//require('os').cpus().length,
 
   host: {
     port: env.NODE_PORT || 3333,
