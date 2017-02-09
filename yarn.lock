@@ -3023,9 +3023,9 @@ osnova-lib@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/osnova-lib/-/osnova-lib-1.1.0.tgz#2dd1a0665f7f934cee5d70bf9a65e38bc0cf5297"
 
-osnova@^0.19.0:
-  version "0.19.0"
-  resolved "https://registry.yarnpkg.com/osnova/-/osnova-0.19.0.tgz#ed6259117bdc354af75fe8878b03ab29816e7ab8"
+osnova@^0.20.2:
+  version "0.20.2"
+  resolved "https://registry.yarnpkg.com/osnova/-/osnova-0.20.2.tgz#75d10f0114849a45e38268d07a39f2c55f333981"
   dependencies:
     axon "^2.0.2"
     bcryptjs "^2.3.0"

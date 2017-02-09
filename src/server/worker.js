@@ -53,16 +53,16 @@ const SocketEvents = (osnova) => {
   osnova.next();
 };
 
+// worker gets listen function from osnova-cluster-launcher(.worker.listen)
 module.exports = (listen) => {
 
   const osnova = OSNOVA({
     modules: [webpackGeneratedHtml2(), SocketEvents],
-
     core: require('../../config/core'),
     listen
   });
 
-  osnova.start(() => {
+  osnova.start((osnova) => {
     console.log('I WAS CALLED FROM WORKER. GZ');
   });
 };

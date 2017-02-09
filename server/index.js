@@ -63,14 +63,34 @@
 /******/ 	__webpack_require__.p = "/";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 13);
+/******/ 	return __webpack_require__(__webpack_require__.s = 14);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = require("osnova-cluster-launcher");
+"use strict";
+// Created by snov on 03.02.2017.
+
+
+var config = {
+  paths: {
+    absolute: {
+      root: process.cwd()
+    },
+    assets: './static/'
+  },
+  target: __webpack_require__(1),
+  session: {
+    secret: 'VERYSECRETSTRING'
+  },
+  use: {
+    auth: false
+  }
+};
+
+module.exports = config;
 
 /***/ }),
 /* 1 */
@@ -88,10 +108,10 @@ module.exports = require("osnova-cluster-launcher");
 var env = process.env;
 
 var localSettings = {
-  threads: 2, //require('os').cpus().length,
+  threads: 1, //require('os').cpus().length,
 
   host: {
-    port: env.NODE_PORT || 3333,
+    port: env.NODE_PORT || 3322,
     ip: env.NODE_IP || '127.0.0.1'
   },
 
@@ -134,148 +154,48 @@ module.exports = exports = targetConfig;
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-// Created by snov on 03.02.2017.
-
-
-var config = {
-  paths: {
-    absolute: {
-      root: process.cwd()
-    },
-    assets: './static/'
-  },
-  target: __webpack_require__(1),
-  session: {
-    secret: 'VERYSECRETSTRING'
-  },
-  use: {
-    auth: false
-  }
-};
-
-module.exports = config;
-
-/***/ }),
-/* 3 */
 /***/ (function(module, exports) {
 
 module.exports = require("osnova");
 
 /***/ }),
-/* 4 */
+/* 3 */
 /***/ (function(module, exports) {
 
 module.exports = require("react");
 
 /***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+// Created by snov on 09.02.2017.
+//
+// Multiprocess cluster launcher config
+//
+/////////////////////////////////////////////////////////////////
+
+var _require = __webpack_require__(10),
+    launch = _require.launch,
+    stickyListenWorker = _require.stickyListenWorker,
+    stickyListenMaster = _require.stickyListenMaster;
+
+launch({
+  worker: {
+    main: __webpack_require__(7),
+    listen: stickyListenWorker
+  },
+  master: {
+    main: __webpack_require__(6),
+    listen: stickyListenMaster
+  },
+  config: __webpack_require__(1)
+});
+
+/***/ }),
 /* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _osnova = __webpack_require__(3);
-
-var _osnova2 = _interopRequireDefault(_osnova);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-module.exports = function () {
-
-  var osnova = (0, _osnova2.default)({
-    master: true,
-    modules: [],
-    core: __webpack_require__(2)
-  });
-
-  osnova.start(function () {
-    console.log('I WAS CALLED FROM WORKER. GZ');
-  });
-}; // Created by snov on 19.09.2016.
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _osnova = __webpack_require__(3);
-
-var _osnova2 = _interopRequireDefault(_osnova);
-
-var _path = __webpack_require__(10);
-
-var _path2 = _interopRequireDefault(_path);
-
-var _fs = __webpack_require__(9);
-
-var _fs2 = _interopRequireDefault(_fs);
-
-var _react = __webpack_require__(4);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _server = __webpack_require__(12);
-
-var _server2 = _interopRequireDefault(_server);
-
-var _caption = __webpack_require__(7);
-
-var _caption2 = _interopRequireDefault(_caption);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// Created by snov on 22.06.2016.
-
-var webpackGeneratedHtml2 = function webpackGeneratedHtml2(opts) {
-  return function (osnova) {
-    var app = osnova.express;
-    var assetsPath = osnova.opts.core.paths.assets;
-    var manifest = JSON.parse(_fs2.default.readFileSync(_path2.default.resolve(assetsPath, './dist/manifest.json'), 'utf8'));
-
-    app.get('*', function (req, res) {
-      res.set('Content-Type', 'text/html');
-
-      res.send('<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <link rel="stylesheet" type="text/css" href=' + ('dist/' + manifest['index.css']) + '>\n  <script rel="script" src=' + ('dist/' + manifest['manifest.js']) + '></script>\n  <script rel="script" src=' + ('dist/' + manifest['vendor.js']) + '></script>\n  <script rel="script" src=' + ('dist/' + manifest['index.js']) + '></script>\n  <title>Osnova-react-environment application</title>\n</head>\n<body>\n    <div id="app"></div>\n    ' + (0, _server.renderToString)(_react2.default.createElement(_caption2.default, { text: 'hello?' })) + '\n</body>\n</html>');
-    });
-
-    osnova.next();
-  };
-};
-
-var SocketEvents = function SocketEvents(osnova) {
-  var io = osnova.io;
-  if (io === undefined) {
-    throw new Error('osnova.io is undefined. Turn on osnova-module-socket!');
-  }
-
-  io.on('client-message', function (socket, payload) {
-    console.log('Recieved from client: ' + payload);
-  });
-
-  osnova.next();
-};
-
-module.exports = function (listen) {
-
-  var osnova = (0, _osnova2.default)({
-    modules: [webpackGeneratedHtml2(), SocketEvents],
-
-    core: __webpack_require__(2),
-    listen: listen
-  });
-
-  osnova.start(function () {
-    console.log('I WAS CALLED FROM WORKER. GZ');
-  });
-};
-
-/***/ }),
-/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -287,11 +207,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = __webpack_require__(4);
+var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(11);
+var _reactDom = __webpack_require__(12);
 
 var _style = __webpack_require__(8);
 
@@ -346,6 +266,110 @@ Object.defineProperty(Caption, 'defaultProps', {
 exports.default = Caption;
 
 /***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _osnova = __webpack_require__(2);
+
+var _osnova2 = _interopRequireDefault(_osnova);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+module.exports = function () {
+
+  var osnova = (0, _osnova2.default)({
+    master: true,
+    modules: [],
+    core: __webpack_require__(0)
+  });
+
+  osnova.start(function () {
+    console.log('I WAS CALLED FROM WORKER. GZ');
+  });
+}; // Created by snov on 19.09.2016.
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _osnova = __webpack_require__(2);
+
+var _osnova2 = _interopRequireDefault(_osnova);
+
+var _path = __webpack_require__(11);
+
+var _path2 = _interopRequireDefault(_path);
+
+var _fs = __webpack_require__(9);
+
+var _fs2 = _interopRequireDefault(_fs);
+
+var _react = __webpack_require__(3);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _server = __webpack_require__(13);
+
+var _server2 = _interopRequireDefault(_server);
+
+var _caption = __webpack_require__(5);
+
+var _caption2 = _interopRequireDefault(_caption);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// Created by snov on 22.06.2016.
+
+var webpackGeneratedHtml2 = function webpackGeneratedHtml2(opts) {
+  return function (osnova) {
+    var app = osnova.express;
+    var assetsPath = osnova.opts.core.paths.assets;
+    var manifest = JSON.parse(_fs2.default.readFileSync(_path2.default.resolve(assetsPath, './dist/manifest.json'), 'utf8'));
+
+    app.get('*', function (req, res) {
+      res.set('Content-Type', 'text/html');
+
+      res.send('<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <link rel="stylesheet" type="text/css" href=' + ('dist/' + manifest['index.css']) + '>\n  <script rel="script" src=' + ('dist/' + manifest['manifest.js']) + '></script>\n  <script rel="script" src=' + ('dist/' + manifest['vendor.js']) + '></script>\n  <script rel="script" src=' + ('dist/' + manifest['index.js']) + '></script>\n  <title>Osnova-react-environment application</title>\n</head>\n<body>\n    <div id="app"></div>\n    ' + (0, _server.renderToString)(_react2.default.createElement(_caption2.default, { text: 'hello?' })) + '\n</body>\n</html>');
+    });
+
+    osnova.next();
+  };
+};
+
+var SocketEvents = function SocketEvents(osnova) {
+  var io = osnova.io;
+  if (io === undefined) {
+    throw new Error('osnova.io is undefined. Turn on osnova-module-socket!');
+  }
+
+  io.on('client-message', function (socket, payload) {
+    console.log('Recieved from client: ' + payload);
+  });
+
+  osnova.next();
+};
+
+// worker gets listen function from osnova-cluster-launcher(.worker.listen)
+module.exports = function (listen) {
+
+  var osnova = (0, _osnova2.default)({
+    modules: [webpackGeneratedHtml2(), SocketEvents],
+    core: __webpack_require__(0),
+    listen: listen
+  });
+
+  osnova.start(function (osnova) {
+    console.log('I WAS CALLED FROM WORKER. GZ');
+  });
+};
+
+/***/ }),
 /* 8 */
 /***/ (function(module, exports) {
 
@@ -363,47 +387,41 @@ module.exports = require("fs");
 /* 10 */
 /***/ (function(module, exports) {
 
-module.exports = require("path");
+module.exports = require("osnova-cluster-launcher");
 
 /***/ }),
 /* 11 */
 /***/ (function(module, exports) {
 
-module.exports = require("react-dom");
+module.exports = require("path");
 
 /***/ }),
 /* 12 */
 /***/ (function(module, exports) {
 
-module.exports = require("react-dom/server");
+module.exports = require("react-dom");
 
 /***/ }),
 /* 13 */
+/***/ (function(module, exports) {
+
+module.exports = require("react-dom/server");
+
+/***/ }),
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 // Created by snov on 28.06.2016.
+//
 
-var _require = __webpack_require__(0),
-    launch = _require.launch,
-    stickyListenWorker = _require.stickyListenWorker,
-    stickyListenMaster = _require.stickyListenMaster;
+// launch via cluster launcher
+__webpack_require__(4);
 
-console.log(__webpack_require__(0));
-
-launch({
-  worker: {
-    main: __webpack_require__(6),
-    listen: stickyListenWorker
-  },
-  master: {
-    main: __webpack_require__(5),
-    listen: stickyListenMaster
-  },
-  config: __webpack_require__(1)
-});
+// or comment above and uncomment below for single process server
+//require('./worker')('default');
 
 /***/ })
 /******/ ]);
