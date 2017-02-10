@@ -74,6 +74,10 @@
 // Created by snov on 03.02.2017.
 
 
+var _require = __webpack_require__(1),
+    host = _require.host,
+    database = _require.database;
+
 var config = {
   paths: {
     absolute: {
@@ -81,10 +85,12 @@ var config = {
     },
     assets: './static/'
   },
-  target: __webpack_require__(1),
+  host: host,
+  database: database,
   session: {
     secret: 'VERYSECRETSTRING'
-  }
+  },
+  modules: {}
 };
 
 module.exports = config;
@@ -113,8 +119,7 @@ var localSettings = {
   },
 
   database: {
-    path: 'mongodb://localhost/',
-    name: 'osnova'
+    uri: 'mongodb://localhost/osnova'
   }
 };
 
@@ -128,6 +133,7 @@ var herokuSettings = {
     port: env.PORT || 5000,
     ip: env.NODE_IP || '0.0.0.0'
   },
+
   database: {
     // https://devcenter.heroku.com/articles/mongolab/
     // console command:
@@ -147,7 +153,11 @@ function getDeployTargetConfig() {
 
 var targetConfig = getDeployTargetConfig();
 
-module.exports = exports = targetConfig;
+module.exports = exports = {
+  host: targetConfig.host,
+  database: targetConfig.database,
+  threads: targetConfig.threads
+};
 
 /***/ }),
 /* 2 */
@@ -176,6 +186,10 @@ module.exports = require("react");
 
 var _require = __webpack_require__(10),
     launch = _require.launch;
+
+// worker.listen and worker.master will set to default sticky listens
+// from osnova-cluster-launcher
+
 
 launch({
   worker: {
@@ -271,19 +285,32 @@ var _osnova2 = _interopRequireDefault(_osnova);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var masterCore = Object.assign({}, __webpack_require__(0)); // Created by snov on 19.09.2016.
+// creating copy of default core options, because we don't want to modify the original
+var masterCoreOpts = Object.assign({}, __webpack_require__(0));
 
-masterCore.modules = {};
-masterCore.modules.express = false;
-masterCore.modules.socketio = false;
-masterCore.modules.session = false;
+// ['a', 'b', 'c'] => { a: initValue, b: initValue, c: initValue }
+// Created by snov on 19.09.2016.
+
+var arrayofStringsToObjectKeys = function arrayofStringsToObjectKeys(array) {
+  var initValue = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
+  var obj = {};
+  for (var i = 0; i < array.length; i++) {
+    obj[array[i]] = initValue;
+  }
+  return obj;
+};
+
+// we dont need these core modules on master process
+var modules = ['express', 'socketio', 'session'];
+masterCoreOpts.modules = Object.assign({}, masterCoreOpts.modules, arrayofStringsToObjectKeys(modules, false));
 
 module.exports = function (listen) {
 
   var osnova = (0, _osnova2.default)({
     master: true,
     modules: [],
-    core: masterCore,
+    core: masterCoreOpts,
     listen: listen
   });
 
@@ -365,7 +392,7 @@ module.exports = function (listen) {
   });
 
   osnova.start(function (osnova) {
-    console.log('I WAS CALLED FROM WORKER. GZ');
+    console.log(osnova.opts.core.database);
   });
 };
 

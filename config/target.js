@@ -15,8 +15,7 @@ const localSettings = {
   },
 
   database: {
-    path: 'mongodb://localhost/',
-    name: 'osnova'
+    uri: 'mongodb://localhost/osnova'
   }
 };
 
@@ -30,6 +29,7 @@ const herokuSettings = {
     port: env.PORT || 5000,
     ip: env.NODE_IP || '0.0.0.0'
   },
+
   database: {
     // https://devcenter.heroku.com/articles/mongolab/
     // console command:
@@ -49,4 +49,8 @@ function getDeployTargetConfig() {
 
 const targetConfig = getDeployTargetConfig();
 
-module.exports = exports = targetConfig;
+module.exports = exports = {
+  host: targetConfig.host,
+  database: targetConfig.database,
+  threads: targetConfig.threads
+};

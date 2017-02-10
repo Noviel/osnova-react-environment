@@ -6,6 +6,8 @@
 
 const { launch } = require('osnova-cluster-launcher');
 
+// worker.listen and worker.master will set to default sticky listens
+// from osnova-cluster-launcher
 launch({
   worker: {
     main: require('./worker')

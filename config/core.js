@@ -1,6 +1,8 @@
 // Created by snov on 03.02.2017.
 "use strict";
 
+const { host, database } = require('./target');
+
 const config = {
   paths: {
     absolute: {
@@ -8,9 +10,12 @@ const config = {
     },
     assets: './static/'
   },
-  target: require('./target'),
+  host,
+  database,
   session: {
     secret: 'VERYSECRETSTRING'
+  },
+  modules: {
   }
 };
 

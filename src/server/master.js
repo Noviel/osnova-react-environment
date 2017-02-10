@@ -2,19 +2,28 @@
 
 import OSNOVA from 'osnova';
 
-const masterCore = Object.assign({}, require('../../config/core'));
+// creating copy of default core options, because we don't want to modify the original
+const masterCoreOpts = Object.assign({}, require('../../config/core'));
 
-masterCore.modules = {};
-masterCore.modules.express = false;
-masterCore.modules.socketio = false;
-masterCore.modules.session = false;
+// ['a', 'b', 'c'] => { a: initValue, b: initValue, c: initValue }
+const arrayofStringsToObjectKeys = (array, initValue = true) => {
+  const obj = {};
+  for (let i = 0; i < array.length; i++) {
+    obj[array[i]] = initValue;
+  }
+  return obj;
+};
+
+// we dont need these core modules on master process
+const modules = ['express', 'socketio', 'session'];
+masterCoreOpts.modules = Object.assign({}, masterCoreOpts.modules, arrayofStringsToObjectKeys(modules, false));
 
 module.exports = (listen) => {
 
   const osnova = OSNOVA({
     master: true,
     modules: [],
-    core: masterCore,
+    core: masterCoreOpts,
     listen
   });
 

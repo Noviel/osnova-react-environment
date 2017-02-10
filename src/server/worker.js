@@ -62,6 +62,6 @@ module.exports = (listen) => {
   });
 
   osnova.start((osnova) => {
-    console.log('I WAS CALLED FROM WORKER. GZ');
+    console.log(osnova.opts.core.database);
   });
 };
