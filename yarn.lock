@@ -3015,17 +3015,17 @@ osnova-cluster-launcher@^1.10.0:
   dependencies:
     osnova-lib "^1.1.0"
 
-osnova-lib, osnova-lib@1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/osnova-lib/-/osnova-lib-1.0.3.tgz#5905980440c0cfa5a4e254b0b7aaf4535a0e0935"
+osnova-lib@1.1.1, osnova-lib@^1.1.0:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/osnova-lib/-/osnova-lib-1.1.1.tgz#32bdd5835918845d8cef0e9c932213f031d3c5cc"
 
-osnova-lib@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/osnova-lib/-/osnova-lib-1.1.0.tgz#2dd1a0665f7f934cee5d70bf9a65e38bc0cf5297"
+osnova-lib@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/osnova-lib/-/osnova-lib-1.1.4.tgz#fa0b966cf247bbdc9b39b4e4d62daa73d71f8ad8"
 
-osnova@^0.20.4:
-  version "0.20.4"
-  resolved "https://registry.yarnpkg.com/osnova/-/osnova-0.20.4.tgz#0fe0a9191047b4f4665ae3434bfe7aa7ccf3d7c1"
+osnova@^0.21.8:
+  version "0.21.8"
+  resolved "https://registry.yarnpkg.com/osnova/-/osnova-0.21.8.tgz#1d513291bf3b762660052a4b68bde187ee97fbbb"
   dependencies:
     axon "^2.0.2"
     bcryptjs "^2.3.0"
@@ -3038,7 +3038,7 @@ osnova@^0.20.4:
     express-session "^1.14.0"
     mongoose "^4.5.1"
     object-assign "^4.1.0"
-    osnova-lib "1.0.3"
+    osnova-lib "^1.1.4"
     passport "^0.3.2"
     passport.socketio "^3.6.2"
     pug "^2.0.0-beta3"

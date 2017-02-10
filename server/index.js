@@ -84,9 +84,6 @@ var config = {
   target: __webpack_require__(1),
   session: {
     secret: 'VERYSECRETSTRING'
-  },
-  use: {
-    auth: false
   }
 };
 
@@ -274,19 +271,26 @@ var _osnova2 = _interopRequireDefault(_osnova);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var masterCore = Object.assign({}, __webpack_require__(0)); // Created by snov on 19.09.2016.
+
+masterCore.modules = {};
+masterCore.modules.express = false;
+masterCore.modules.socketio = false;
+masterCore.modules.session = false;
+
 module.exports = function (listen) {
 
   var osnova = (0, _osnova2.default)({
     master: true,
     modules: [],
-    core: __webpack_require__(0),
+    core: masterCore,
     listen: listen
   });
 
   osnova.start(function () {
     console.log('I WAS CALLED FROM WORKER. GZ');
   });
-}; // Created by snov on 19.09.2016.
+};
 
 /***/ }),
 /* 7 */

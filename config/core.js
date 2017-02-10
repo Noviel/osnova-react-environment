@@ -11,9 +11,6 @@ const config = {
   target: require('./target'),
   session: {
     secret: 'VERYSECRETSTRING'
-  },
-  use: {
-    auth: false
   }
 };
 

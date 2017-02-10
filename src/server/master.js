@@ -2,12 +2,19 @@
 
 import OSNOVA from 'osnova';
 
+const masterCore = Object.assign({}, require('../../config/core'));
+
+masterCore.modules = {};
+masterCore.modules.express = false;
+masterCore.modules.socketio = false;
+masterCore.modules.session = false;
+
 module.exports = (listen) => {
 
   const osnova = OSNOVA({
     master: true,
     modules: [],
-    core: require('../../config/core'),
+    core: masterCore,
     listen
   });
 
