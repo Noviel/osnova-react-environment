@@ -2,21 +2,21 @@
 
 import OSNOVA from 'osnova';
 
-// creating copy of default core options, because we don't want to modify the original
+// creating a copy of a default core options, because we don't want to modify the original
 const masterCoreOpts = Object.assign({}, require('../../config/core'));
 
 // ['a', 'b', 'c'] => { a: initValue, b: initValue, c: initValue }
 const arrayofStringsToObjectKeys = (array, initValue = true) => {
-  const obj = {};
-  for (let i = 0; i < array.length; i++) {
-    obj[array[i]] = initValue;
-  }
-  return obj;
+  return array.reduce((prev, cur) => {
+    prev[cur] = initValue;
+    return prev;
+  }, {});
 };
 
-// we dont need these core modules on master process
+// we dont need these core modules on the master process
 const modules = ['express', 'socketio', 'session'];
 masterCoreOpts.modules = Object.assign({}, masterCoreOpts.modules, arrayofStringsToObjectKeys(modules, false));
+
 
 module.exports = (listen) => {
 
@@ -27,5 +27,8 @@ module.exports = (listen) => {
     listen
   });
 
-  osnova.start(() => { console.log('I WAS CALLED FROM WORKER. GZ'); });
+  osnova.start(() => {
+    /* eslint-disable no-console */
+    console.log(`Hello from master! [pid=${process.pid}]`);
+  });
 };

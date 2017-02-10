@@ -1,5 +1,5 @@
 {
-  "extends": "eslint:recommended",
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
   "parser": "babel-eslint",
   "env": {
     "browser": true,
@@ -7,5 +7,8 @@
   },
   "rules": {
     "indent": [1, 2]
-  }
+  },
+  "plugins": [
+    "react"
+  ]
 }

@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "/";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 14);
+/******/ 	return __webpack_require__(__webpack_require__.s = 15);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -89,8 +89,7 @@ var config = {
   database: database,
   session: {
     secret: 'VERYSECRETSTRING'
-  },
-  modules: {}
+  }
 };
 
 module.exports = config;
@@ -184,7 +183,7 @@ module.exports = require("react");
 //
 /////////////////////////////////////////////////////////////////
 
-var _require = __webpack_require__(10),
+var _require = __webpack_require__(12),
     launch = _require.launch;
 
 // worker.listen and worker.master will set to default sticky listens
@@ -193,7 +192,7 @@ var _require = __webpack_require__(10),
 
 launch({
   worker: {
-    main: __webpack_require__(7)
+    main: __webpack_require__(9)
   },
   master: {
     main: __webpack_require__(6)
@@ -218,9 +217,7 @@ var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(12);
-
-var _style = __webpack_require__(8);
+var _style = __webpack_require__(10);
 
 var _style2 = _interopRequireDefault(_style);
 
@@ -285,7 +282,7 @@ var _osnova2 = _interopRequireDefault(_osnova);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// creating copy of default core options, because we don't want to modify the original
+// creating a copy of a default core options, because we don't want to modify the original
 var masterCoreOpts = Object.assign({}, __webpack_require__(0));
 
 // ['a', 'b', 'c'] => { a: initValue, b: initValue, c: initValue }
@@ -294,14 +291,13 @@ var masterCoreOpts = Object.assign({}, __webpack_require__(0));
 var arrayofStringsToObjectKeys = function arrayofStringsToObjectKeys(array) {
   var initValue = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
-  var obj = {};
-  for (var i = 0; i < array.length; i++) {
-    obj[array[i]] = initValue;
-  }
-  return obj;
+  return array.reduce(function (prev, cur) {
+    prev[cur] = initValue;
+    return prev;
+  }, {});
 };
 
-// we dont need these core modules on master process
+// we dont need these core modules on the master process
 var modules = ['express', 'socketio', 'session'];
 masterCoreOpts.modules = Object.assign({}, masterCoreOpts.modules, arrayofStringsToObjectKeys(modules, false));
 
@@ -315,7 +311,8 @@ module.exports = function (listen) {
   });
 
   osnova.start(function () {
-    console.log('I WAS CALLED FROM WORKER. GZ');
+    /* eslint-disable no-console */
+    console.log('Hello from master! [pid=' + process.pid + ']');
   });
 };
 
@@ -326,15 +323,15 @@ module.exports = function (listen) {
 "use strict";
 
 
-var _osnova = __webpack_require__(2);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-var _osnova2 = _interopRequireDefault(_osnova);
-
-var _path = __webpack_require__(11);
+var _path = __webpack_require__(13);
 
 var _path2 = _interopRequireDefault(_path);
 
-var _fs = __webpack_require__(9);
+var _fs = __webpack_require__(11);
 
 var _fs2 = _interopRequireDefault(_fs);
 
@@ -342,7 +339,7 @@ var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _server = __webpack_require__(13);
+var _server = __webpack_require__(14);
 
 var _server2 = _interopRequireDefault(_server);
 
@@ -352,52 +349,111 @@ var _caption2 = _interopRequireDefault(_caption);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// Created by snov on 22.06.2016.
+var generateHtmlString = function generateHtmlString(opts) {
+  var manifest = JSON.parse(_fs2.default.readFileSync(_path2.default.resolve(opts.assetsPath, opts.distPath, 'manifest.json'), 'utf8'));
 
-var webpackGeneratedHtml2 = function webpackGeneratedHtml2(opts) {
+  return '\n<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <link rel="stylesheet" type="text/css" href=' + (opts.distPath + manifest['index.css']) + '>\n  <script rel="script" src=' + (opts.distPath + manifest['manifest.js']) + '></script>\n  <script rel="script" src=' + (opts.distPath + manifest['vendor.js']) + '></script>\n  <script rel="script" src=' + (opts.distPath + manifest['index.js']) + '></script>\n  <title>Osnova-react-environment application</title>\n</head>\n<body>\n    <div id="app"></div>\n    ' + (0, _server.renderToString)(_react2.default.createElement(_caption2.default, { text: 'hello?' })) + '\n</body>\n</html>\n';
+};
+
+/* eslint-disable no-unused-vars */
+// Created by snov on 10.02.2017.
+//
+// Generates HTML based on Webpack bundle
+//
+/////////////////////////////////////////////////////////////////
+
+var sendHtml = function sendHtml(opts) {
   return function (osnova) {
     var app = osnova.express;
-    var assetsPath = osnova.opts.core.paths.assets;
-    var manifest = JSON.parse(_fs2.default.readFileSync(_path2.default.resolve(assetsPath, './dist/manifest.json'), 'utf8'));
+    var htmlString = generateHtmlString({
+      assetsPath: osnova.opts.core.paths.assets,
+      distPath: './dist/'
+    });
 
     app.get('*', function (req, res) {
-      res.set('Content-Type', 'text/html');
-
-      res.send('<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n  <link rel="stylesheet" type="text/css" href=' + ('dist/' + manifest['index.css']) + '>\n  <script rel="script" src=' + ('dist/' + manifest['manifest.js']) + '></script>\n  <script rel="script" src=' + ('dist/' + manifest['vendor.js']) + '></script>\n  <script rel="script" src=' + ('dist/' + manifest['index.js']) + '></script>\n  <title>Osnova-react-environment application</title>\n</head>\n<body>\n    <div id="app"></div>\n    ' + (0, _server.renderToString)(_react2.default.createElement(_caption2.default, { text: 'hello?' })) + '\n</body>\n</html>');
+      res.send(htmlString);
     });
 
     osnova.next();
   };
 };
 
-var SocketEvents = function SocketEvents(osnova) {
-  var io = osnova.io;
-  if (io === undefined) {
-    throw new Error('osnova.io is undefined. Turn on osnova-module-socket!');
-  }
+exports.default = sendHtml;
 
-  io.on('client-message', function (socket, payload) {
-    console.log('Received from the client: ' + payload);
-  });
+module.exports = sendHtml;
 
-  osnova.next();
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+// Created by snov on 10.02.2017.
+//
+// ABOUT THIS FILE
+//
+/////////////////////////////////////////////////////////////////
+
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-console */
+var socketEvents = function socketEvents(opts) {
+  return function (osnova) {
+    var io = osnova.io;
+    if (io === undefined) {
+      throw new Error('osnova.io is undefined. Turn on socketio in osnova.opts.core.modules!');
+    }
+
+    io.on('client-message', function (socket, payload) {
+      console.log('Received from the client: ' + payload);
+    });
+
+    osnova.next();
+  };
 };
+
+exports.default = socketEvents;
+
+module.exports = socketEvents;
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _osnova = __webpack_require__(2);
+
+var _osnova2 = _interopRequireDefault(_osnova);
+
+var _socketEvents = __webpack_require__(8);
+
+var _socketEvents2 = _interopRequireDefault(_socketEvents);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// Created by snov on 22.06.2016.
 
 module.exports = function (listen) {
 
   var osnova = (0, _osnova2.default)({
-    modules: [webpackGeneratedHtml2(), SocketEvents],
+    modules: [__webpack_require__(7)(), (0, _socketEvents2.default)()],
     core: __webpack_require__(0),
     listen: listen
   });
 
-  osnova.start(function (osnova) {
-    console.log(osnova.opts.core.database);
+  osnova.start(function () {
+    /* eslint-disable no-console */
+    console.log('Hello from worker! [pid=' + process.pid + ']');
   });
 };
 
 /***/ }),
-/* 8 */
+/* 10 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -405,37 +461,31 @@ module.exports = {
 };
 
 /***/ }),
-/* 9 */
+/* 11 */
 /***/ (function(module, exports) {
 
 module.exports = require("fs");
 
 /***/ }),
-/* 10 */
+/* 12 */
 /***/ (function(module, exports) {
 
 module.exports = require("osnova-cluster-launcher");
 
 /***/ }),
-/* 11 */
+/* 13 */
 /***/ (function(module, exports) {
 
 module.exports = require("path");
 
 /***/ }),
-/* 12 */
-/***/ (function(module, exports) {
-
-module.exports = require("react-dom");
-
-/***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-dom/server");
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

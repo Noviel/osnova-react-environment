@@ -3,8 +3,7 @@
 const coreConfig = require('../config/core');
 
 const config = {
-  paths: coreConfig.paths,
-  target: coreConfig.target
+  paths: coreConfig.paths
 };
 
 module.exports = config;

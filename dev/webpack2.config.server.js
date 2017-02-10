@@ -40,7 +40,7 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: excludeDirs,
-        loader: 'babel-loader'
+        loader: ['babel-loader', 'eslint-loader']
       },
       {
         test: /\.css$/,

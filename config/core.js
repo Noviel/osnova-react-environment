@@ -14,8 +14,6 @@ const config = {
   database,
   session: {
     secret: 'VERYSECRETSTRING'
-  },
-  modules: {
   }
 };
 

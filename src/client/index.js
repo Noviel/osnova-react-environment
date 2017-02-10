@@ -1,5 +1,6 @@
 // Created by snov on 27.08.2016.
-import React, { Component } from 'react';
+
+import React from 'react';
 import { render } from 'react-dom';
 import Caption from './components/caption';
 import styles from './style.css';

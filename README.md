@@ -1,52 +1,52 @@
 #OSNOVA-REACT-ENVIRONMENT
 
-###bI
-ES6+ environment (Babel+Webpack2) for modern react application with OSNOVA-based server.
+##bI?
+Modern ready-to-use environment for quick start of a new react application development.
 
-###Features and components
+##Features
 
-#### Client-side
- - babel
- - webpack
- - postcss
+ - Building either a client and a server with transparently configured Webpack
+ - Easily extendable and configurable osnova based server
+ - Server side rendering with Webpack-React-Redux stack
+ 
+##Components 
+
  - react
  - redux
-
-#### Server-side 
+ - webpack
+ - postcss
  - osnova
+ - osnova-cluster-launcher
+ 
+##Install
 
-###Install
-
-####via git (preferable)
+###Via git:
 
     git clone git@github.com:Noviel/osnova-react-environment.git <your-application-name>
-
-####or via download
+    
+###Or download:
 
     https://github.com/Noviel/osnova-react-environment/archive/master.zip
-  and uznip to new project directory.
-
-###Prepare
+    
+##Prepare
 - Go to `<your-application-name>` root directory.
 - Delete `.git` directory.
 - Set in `package.json` information about your application.
 - `npm install` or `yarn install` for dependencies.
 
-###Structure
+##Launching
+
+    npm run build
+    npm run start
+##Structure
 
   Coming soon...
   
-###Scripts
+##Scripts
   
   Coming soon...
 
-###Building
-`npm run build-client` and `npm run build-server` or `npm run build` for both.  
 
-Client code will be bundled by Webpack to `/static/dist` default folder, server code will be transpiled by Babel and putted to `/server`.
+##Testing
 
-###Testing
-- Run some tests.
-
-###Publishing
-- Launch your application in production.
+  Coming soon...
