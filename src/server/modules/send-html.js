@@ -12,7 +12,7 @@ import fs from 'fs';
 import React from 'react';
 import reactDOM, { renderToString } from 'react-dom/server';
 
-import Caption from '../../client/components/caption';
+import Caption from '../../components/caption';
 
 const generateHtmlString = (opts) => {
   const manifest = JSON.parse(fs.readFileSync(path.resolve(opts.assetsPath, opts.distPath, 'manifest.json'), 'utf8'));

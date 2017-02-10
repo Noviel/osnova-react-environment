@@ -457,7 +457,7 @@ module.exports = function (listen) {
 /***/ (function(module, exports) {
 
 module.exports = {
-	"caption": "caption--3HO5B"
+	"caption": "caption--w3nRo"
 };
 
 /***/ }),

@@ -82,7 +82,7 @@ module.exports = {"main":"main--24h2g"};
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-module.exports = {"caption":"caption--3HO5B"};
+module.exports = {"caption":"caption--w3nRo"};
 
 /***/ }),
 
@@ -140,4 +140,4 @@ document.addEventListener('DOMContentLoaded', function () {
 /***/ })
 
 },[234]);
-//# sourceMappingURL=index.120797c97482af9d2b57.js.map
+//# sourceMappingURL=index.60f0024aea38dc9005db.js.map

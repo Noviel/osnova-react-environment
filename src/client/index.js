@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { render } from 'react-dom';
-import Caption from './components/caption';
+import Caption from '../components/caption';
 import styles from './style.css';
 
 const io = require('socket.io-client');

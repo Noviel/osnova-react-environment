@@ -6,17 +6,19 @@ Modern ready-to-use environment for quick start of a new react application devel
 ##Features
 
  - Building either a client and a server with transparently configured Webpack
- - Easily extendable and configurable osnova based server
+ - Linting on the build stage that enforces best code writing practices
+ - Extendable and configurable [osnova](https://github.com/Noviel/osnova) based server
  - Server side rendering with Webpack-React-Redux stack
- 
+
 ##Components 
 
- - react
- - redux
- - webpack
- - postcss
- - osnova
- - osnova-cluster-launcher
+ - [react](https://facebook.github.io/react/)
+ - [redux](http://redux.js.org/)
+ - [webpack](webpack.js.org)
+ - [postcss](http://postcss.org/)
+ - [eslint](http://eslint.org/)
+ - [osnova](https://github.com/Noviel/osnova)
+ - [osnova-cluster-launcher](https://github.com/Noviel/osnova-cluster-launcher)
  
 ##Install
 
@@ -38,6 +40,7 @@ Modern ready-to-use environment for quick start of a new react application devel
 
     npm run build
     npm run start
+    
 ##Structure
 
   Coming soon...
