@@ -34,7 +34,7 @@ const herokuSettings = {
     // https://devcenter.heroku.com/articles/mongolab/
     // console command:
     // $ heroku config:get MONGODB_URI -app [your-app-name]
-    uri: 'mongodb://user:passs@x.mlab.com:33966/user'
+    uri: 'mongodb://heroku_xlwrbh8k:uo7pr3rom7srvp1pijc6lh5954@ds149479.mlab.com:49479/heroku_xlwrbh8k'
   }
 };
 
