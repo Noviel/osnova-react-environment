@@ -1,7 +1,7 @@
 {
   "name": "osnova-react-environment",
   "author": "Aleksandr Snov <snov.contact@gmail.com>",
-  "description": "Modern ready-to-use environment for quick start of new react application development",
+  "description": "Modern ready-to-use environment for quick start of a new react application development.",
   "keywords": [
     "webpack",
     "babel",
@@ -13,7 +13,6 @@
   ],
   "license": "MIT",
   "main": "server/index.js",
-  "private": false,
   "readme": "README.md",
   "repository": {
     "type": "git",
@@ -22,12 +21,13 @@
   "dependencies": {
     "better-npm-run": "^0.0.14",
     "osnova": "^0.23.0",
-    "osnova-cluster-launcher": "^1.10.0",
-    "osnova-lib": "1.1.1",
+    "osnova-cluster-launcher": "^1.11.15",
+    "osnova-lib": "^2.0.2",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-redux": "^5.0.2",
-    "redux": "^3.6.0"
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",

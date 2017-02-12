@@ -1279,6 +1279,10 @@ clone@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/clone/-/clone-1.0.2.tgz#260b7a99ebb1edfe247538175f783243cb19d149"
 
+clone@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/clone/-/clone-2.1.0.tgz#9c715bfbd39aa197c8ee0f8e65c3912ba34f8cd6"
+
 co@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/co/-/co-4.6.0.tgz#6ea6bdf3d853ae54ccb8e47bfa0bf3f9031fb184"
@@ -3398,23 +3402,21 @@ os-tmpdir@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/os-tmpdir/-/os-tmpdir-1.0.2.tgz#bbe67406c79aa85c5cfec766fe5734555dfa1274"
 
-osnova-cluster-launcher@^1.10.0:
-  version "1.10.0"
-  resolved "https://registry.yarnpkg.com/osnova-cluster-launcher/-/osnova-cluster-launcher-1.10.0.tgz#e877c6ae7b28783841afdb4455fdffd988667dc7"
+osnova-cluster-launcher@^1.11.15:
+  version "1.11.15"
+  resolved "https://registry.yarnpkg.com/osnova-cluster-launcher/-/osnova-cluster-launcher-1.11.15.tgz#07c55c1b68b2fcca641ace3642054ec020ee9a8b"
   dependencies:
-    osnova-lib "^1.1.0"
+    osnova-lib "^2.0.2"
 
-osnova-lib@1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/osnova-lib/-/osnova-lib-1.1.1.tgz#32bdd5835918845d8cef0e9c932213f031d3c5cc"
-
-osnova-lib@^1.1.0, osnova-lib@^1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/osnova-lib/-/osnova-lib-1.1.4.tgz#fa0b966cf247bbdc9b39b4e4d62daa73d71f8ad8"
+osnova-lib@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/osnova-lib/-/osnova-lib-2.0.2.tgz#105c2bdad32beb50bcd1800acb26928e87e41cb0"
+  dependencies:
+    clone "^2.1.0"
 
 osnova@^0.23.0:
-  version "0.23.0"
-  resolved "https://registry.yarnpkg.com/osnova/-/osnova-0.23.0.tgz#549da265d56971d67773f2a085aaaea05ad55d1f"
+  version "0.23.2"
+  resolved "https://registry.yarnpkg.com/osnova/-/osnova-0.23.2.tgz#f1ec7e703f4fcce72b2e26b91678048508eb6346"
   dependencies:
     axon "^2.0.2"
     bcryptjs "^2.3.0"
@@ -3427,7 +3429,7 @@ osnova@^0.23.0:
     express-session "^1.14.0"
     mongoose "^4.5.1"
     object-assign "^4.1.0"
-    osnova-lib "^1.1.4"
+    osnova-lib "^2.0.2"
     passport "^0.3.2"
     passport.socketio "^3.6.2"
     pug "^2.0.0-beta3"
@@ -4359,6 +4361,10 @@ reduce-function-call@^1.0.1:
   resolved "https://registry.yarnpkg.com/reduce-function-call/-/reduce-function-call-1.0.2.tgz#5a200bf92e0e37751752fe45b0ab330fd4b6be99"
   dependencies:
     balanced-match "^0.4.2"
+
+redux-thunk@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.2.0.tgz#e615a16e16b47a19a515766133d1e3e99b7852e5"
 
 redux@^3.6.0:
   version "3.6.0"

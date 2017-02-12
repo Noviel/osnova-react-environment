@@ -14,7 +14,7 @@ Modern ready-to-use environment for quick start of a new react application devel
 
  - [react](https://facebook.github.io/react/)
  - [redux](http://redux.js.org/)
- - [webpack](webpack.js.org)
+ - [webpack](https://webpack.js.org/)
  - [postcss](http://postcss.org/)
  - [eslint](http://eslint.org/)
  - [osnova](https://github.com/Noviel/osnova)

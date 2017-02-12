@@ -12,7 +12,6 @@ module.exports = (listen) => {
   });
 
   osnova.start(() => {
-    /* eslint-disable no-console */
     console.log(`Hello from worker! [pid=${process.pid}]`);
   });
 };

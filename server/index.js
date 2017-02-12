@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "/";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 15);
+/******/ 	return __webpack_require__(__webpack_require__.s = 16);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -183,7 +183,7 @@ module.exports = require("react");
 //
 /////////////////////////////////////////////////////////////////
 
-var _require = __webpack_require__(12),
+var _require = __webpack_require__(13),
     launch = _require.launch;
 
 // worker.listen and worker.master will set to default sticky listens
@@ -217,7 +217,7 @@ var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _style = __webpack_require__(10);
+var _style = __webpack_require__(11);
 
 var _style2 = _interopRequireDefault(_style);
 
@@ -280,26 +280,18 @@ var _osnova = __webpack_require__(2);
 
 var _osnova2 = _interopRequireDefault(_osnova);
 
+var _core = __webpack_require__(10);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // creating a copy of a default core options, because we don't want to modify the original
-var masterCoreOpts = Object.assign({}, __webpack_require__(0));
-
-// ['a', 'b', 'c'] => { a: initValue, b: initValue, c: initValue }
 // Created by snov on 19.09.2016.
 
-var arrayofStringsToObjectKeys = function arrayofStringsToObjectKeys(array) {
-  var initValue = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-
-  return array.reduce(function (prev, cur) {
-    prev[cur] = initValue;
-    return prev;
-  }, {});
-};
+var masterCoreOpts = Object.assign({}, __webpack_require__(0));
 
 // we dont need these core modules on the master process
-var modules = ['express', 'socketio', 'session'];
-masterCoreOpts.modules = Object.assign({}, masterCoreOpts.modules, arrayofStringsToObjectKeys(modules, false));
+var modules = (0, _core.stringsToObjectKeys)(['express', 'socketio', 'session'], false);
+masterCoreOpts.modules = Object.assign({}, masterCoreOpts.modules, modules);
 
 module.exports = function (listen) {
 
@@ -311,7 +303,6 @@ module.exports = function (listen) {
   });
 
   osnova.start(function () {
-    /* eslint-disable no-console */
     console.log('Hello from master! [pid=' + process.pid + ']');
   });
 };
@@ -327,11 +318,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _path = __webpack_require__(13);
+var _path = __webpack_require__(14);
 
 var _path2 = _interopRequireDefault(_path);
 
-var _fs = __webpack_require__(11);
+var _fs = __webpack_require__(12);
 
 var _fs2 = _interopRequireDefault(_fs);
 
@@ -339,7 +330,7 @@ var _react = __webpack_require__(3);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _server = __webpack_require__(14);
+var _server = __webpack_require__(15);
 
 var _server2 = _interopRequireDefault(_server);
 
@@ -403,12 +394,17 @@ Object.defineProperty(exports, "__esModule", {
 var socketEvents = function socketEvents(opts) {
   return function (osnova) {
     var io = osnova.io;
+    var _io = io.io;
     if (io === undefined) {
       throw new Error('osnova.io is undefined. Turn on socketio in osnova.opts.core.modules!');
     }
 
-    io.on('client-message', function (socket, payload) {
-      console.log('Received from the client: ' + payload);
+    io.on('counter-increment', function (socket, payload) {
+      _io.emit('counter-updated', 1);
+    });
+
+    io.on('counter-decrement', function (socket, payload) {
+      _io.emit('counter-updated', -1);
     });
 
     osnova.next();
@@ -447,13 +443,64 @@ module.exports = function (listen) {
   });
 
   osnova.start(function () {
-    /* eslint-disable no-console */
     console.log('Hello from worker! [pid=' + process.pid + ']');
   });
 };
 
 /***/ }),
 /* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+exports.stringsToObjectKeys = stringsToObjectKeys;
+// Created by snov on 12.02.2017.
+//
+// Core utility library
+//
+///////////////////////////////////////////////////////////////
+
+// Converts array of strings to an object with these strings as keys.
+//
+// @param strings { Array }
+// @param initializer { any } optional, default = undefined:
+//    - undefined: the every key will be set to itself
+//    - function {key => value}: it will be executed on the every key to produce the value
+//    - other: the every key will be set to initializer.
+// @returns { Object }
+//
+// f(['a', 'b', 'c'], 1) == { a: 1, b: 1, c: 1 }
+// f(['a', 'b', 'c']) == { a: 'a', b: 'b', c: 'c' }
+// f(['a', 'b', 'c'], v => v + '!') == { a: 'a!', b: 'b!', c: 'c!' }
+function stringsToObjectKeys() {
+  var strings = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var initializer = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
+
+  if ((typeof strings === 'undefined' ? 'undefined' : _typeof(strings)) != 'object' || typeof strings.reduce != 'function') {
+    return {};
+  }
+
+  return strings.reduce(function (prev, cur) {
+    if (typeof initializer == 'undefined') {
+      prev[cur] = cur;
+    } else if (typeof initializer == 'function') {
+      prev[cur] = initializer(cur);
+    } else {
+      prev[cur] = initializer;
+    }
+    return prev;
+  }, {});
+}
+
+/***/ }),
+/* 11 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -461,31 +508,31 @@ module.exports = {
 };
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports) {
 
 module.exports = require("fs");
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports) {
 
 module.exports = require("osnova-cluster-launcher");
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports) {
 
 module.exports = require("path");
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports) {
 
 module.exports = require("react-dom/server");
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
