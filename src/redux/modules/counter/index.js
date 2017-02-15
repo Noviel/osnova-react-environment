@@ -2,24 +2,20 @@
 //
 // Counter module
 //
-/////////////////////////////////////////////////////////////////
+//========================================================================
 
 import createActionConstants from '../../lib/create-action-constants';
 import createReducer from '../../lib';
 
-/////////////////////////////////////////////////////////////////
 // Actions definition
 const INCREMENT = 'INCREMENT';
 const DECREMENT = 'DECREMENT';
 
 const ACTIONS = createActionConstants(
   'osnova-react-environment', 'counter',
-  {
-    INCREMENT, DECREMENT
-  }
+  [ INCREMENT, DECREMENT ]
 );
 
-/////////////////////////////////////////////////////////////////
 // Action creators
 export function increment(value = 1) {
   return {
@@ -35,16 +31,17 @@ export function decrement(value = 1) {
   }
 }
 
-/////////////////////////////////////////////////////////////////
+const initialState = 0;
+
 // Reducer
-export default createReducer({value: 0}, {
+export default createReducer(initialState, {
 
   [ACTIONS.INCREMENT](state, action) {
-    return Object.assign({}, state, { value: state.value + action.value });
+    return state + action.value;
   },
 
   [ACTIONS.DECREMENT](state, action) {
-    return Object.assign({}, state, { value: state.value - action.value });
+    return state - action.value;
   }
 
 });

@@ -2,13 +2,26 @@
 
 import OSNOVA from 'osnova';
 import socketEvents from './modules/socket-events';
+import sendHtml from './modules/send-html';
+import expressMiddlewares from './modules/express-middlewares';
+import socketIOModule from 'osnova-module-socket.io';
+
+//import socketAuth from './socketio/auth';
 
 module.exports = (listen) => {
 
   const osnova = OSNOVA({
-    modules: [require('./modules/send-html')(), socketEvents()],
+    modules: [
+      expressMiddlewares(),
+      sendHtml(),
+      socketIOModule(),
+      socketEvents()
+    ],
     core: require('../../config/core'),
-    listen
+    listen,
+    DEBUG: {
+      modules: false
+    }
   });
 
   osnova.start(() => {

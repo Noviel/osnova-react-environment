@@ -9,20 +9,27 @@ import io from 'socket.io-client';
 import createStore from '../redux/store';
 import { increment, decrement } from '../redux/modules/counter';
 
+import defineGlobals from '../../config/global';
+
+defineGlobals(true);
+
 let socket = null;
+
 
 const initSocket = () => {
   socket = io('');
   socket.emit('client-message', 'Priffki :****');
+
   socket.on('counter-updated', (payload) => {
     if (payload === 1) {
-      store.dispatch(increment())
+      store.dispatch(increment());
     } else if (payload === -1) {
-      store.dispatch(decrement())
+      store.dispatch(decrement());
     } else {
       console.log(`Unsupported payload ${payload}`);
     }
   })
+
 };
 
 const doIncrement = () => {
@@ -35,16 +42,14 @@ const doDecrement = () => {
 
 
 const store = createStore({
-  counter: {
-    value: 100
-  }
+  counter: 100
 });
 
 const updateApp = () => {
   render(
     <div>
       <Caption text="OPA OPA OPA PA"/>
-      <Counter value={store.getState().counter.value}
+      <Counter value={store.getState().counter}
                onIncrement={() => { doIncrement(); }}
                onDecrement={() => { doDecrement(); }}
       />

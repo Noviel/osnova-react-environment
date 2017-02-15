@@ -4,11 +4,11 @@ import OSNOVA from 'osnova';
 import { stringsToObjectKeys } from '../utils/core';
 
 // creating a copy of a default core options, because we don't want to modify the original
-const masterCoreOpts = Object.assign({}, require('../../config/core'));
+const masterCoreOpts = {...require('../../config/core')};
 
 // we dont need these core modules on the master process
-const modules = stringsToObjectKeys(['express', 'socketio', 'session'], false);
-masterCoreOpts.modules = Object.assign({}, masterCoreOpts.modules, modules);
+const modules = stringsToObjectKeys(['webserver', 'socketio', 'session'], false);
+masterCoreOpts.modules = {...masterCoreOpts.modules, ...modules};
 
 module.exports = (listen) => {
 

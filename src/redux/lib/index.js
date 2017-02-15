@@ -2,7 +2,7 @@
 //
 // Basic helpers for work with Redux
 //
-/////////////////////////////////////////////////////////////////
+//=========================================================================
 
 export default function createReducer(initialState, handlers) {
   return function reducer(state = initialState, action) {

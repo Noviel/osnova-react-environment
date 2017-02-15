@@ -3,15 +3,19 @@
 // Generates action constants by app/module/CONSTANT convention
 // https://github.com/erikras/ducks-modular-redux
 //
-/////////////////////////////////////////////////////////////////
+//=========================================================================
 
 const getActionName = (sep, app, module, action) => {
   return app + sep + module + sep + action;
 };
 
 export default function createActionConstants(app, module, actions) {
-  Object.keys(actions).forEach((e) => {
-    actions[e] = getActionName('/', app, module, actions[e]);
-  });
-  return actions;
+  if (typeof actions != 'object' || typeof actions.reduce != 'function') {
+    return {};
+  }
+
+  return actions.reduce((prev, curr) => {
+    prev[curr] = getActionName('/', app, module, curr);
+    return prev;
+  }, {});
 }

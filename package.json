@@ -1,6 +1,6 @@
 {
   "name": "osnova-react-environment",
-  "author": "Aleksandr Snov <snov.contact@gmail.com>",
+  "version": "0.25.0",
   "description": "Modern ready-to-use environment for quick start of a new react application development.",
   "keywords": [
     "webpack",
@@ -11,6 +11,7 @@
     "boilerplate",
     "osnova"
   ],
+  "author": "Aleksandr Snov <snov.contact@gmail.com>",
   "license": "MIT",
   "main": "server/index.js",
   "readme": "README.md",
@@ -18,11 +19,60 @@
     "type": "git",
     "url": "https://github.com/Noviel/osnova-react-environment.git"
   },
+  "scripts": {
+    "build": "npm run build-server && npm run build-client",
+    "build:production": "npm run build-server:production && npm run build-client:production",
+    "build-server": "better-npm-run build-server",
+    "build-client": "better-npm-run build-client",
+    "build-server:production": "better-npm-run build-server:production",
+    "build-client:production": "better-npm-run build-client:production",
+    "watch": "concurrently -k \"npm run watch-client\" \"npm run watch-server\"",
+    "watch-client": "better-npm-run watch-client",
+    "watch-server": "better-npm-run watch-server",
+    "nodemon": "nodemon server/index.js --config dev/nodemon.json",
+    "major-release": "npm --no-git-tag-version version major && npm publish",
+    "minor-release": "npm --no-git-tag-version version minor && npm publish",
+    "patch-release": "npm --no-git-tag-version version patch && npm publish",
+    "heroku:get:mongodb-uri": "heroku config:get MONGODB_URI",
+    "start": "node server/index.js",
+    "prepublish": "npm run build"
+  },
+  "betterScripts": {
+    "build-server": {
+      "command": "webpack --config dev/webpack.config.server.js"
+    },
+    "build-client": {
+      "command": "webpack --config dev/webpack.config.client.js"
+    },
+    "watch-server": {
+      "command": "better-npm-run build-server --watch --colors"
+    },
+    "watch-client": {
+      "command": "better-npm-run build-client --watch --colors"
+    },
+    "build-server:production": {
+      "command": "better-npm-run build-server",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "build-client:production": {
+      "command": "better-npm-run build-client",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  },
   "dependencies": {
     "better-npm-run": "^0.0.14",
-    "osnova": "^0.23.0",
+    "body-parser": "^1.16.1",
+    "cookie-parser": "^1.4.3",
+    "osnova": "^0.31.5",
     "osnova-cluster-launcher": "^1.11.15",
     "osnova-lib": "^2.0.2",
+    "osnova-module-socket.io": "^0.4.5",
+    "passport": "^0.3.2",
+    "passport.socketio": "^3.7.0",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-redux": "^5.0.2",
@@ -35,6 +85,7 @@
     "babel-eslint": "^7.1.1",
     "babel-loader": "^6.2.10",
     "babel-plugin-transform-class-properties": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.22.0",
     "babel-preset-latest": "^6.16.0",
     "babel-preset-react": "^6.16.0",
     "babel-register": "^6.22.0",
@@ -58,44 +109,5 @@
     "webpack": "2.2.0",
     "webpack-manifest-plugin": "^1.1.0",
     "webpack-node-externals": "^1.5.4"
-  },
-  "scripts": {
-    "build": "npm run build-server && npm run build-client",
-    "build-server": "better-npm-run build-server",
-    "build-client": "better-npm-run build-client",
-    "watch-client": "better-npm-run watch-client",
-    "watch-server": "better-npm-run watch-server",
-    "watch": "concurrently -k \"npm run watch-client\" \"npm run watch-server\"",
-    "nodemon": "nodemon server/index.js --config dev/nodemon.json",
-    "major-release": "npm --no-git-tag-version version major && npm publish",
-    "minor-release": "npm --no-git-tag-version version minor && npm publish",
-    "patch-release": "npm --no-git-tag-version version patch && npm publish",
-    "heroku:get:mlab-uri": "heroku config:get MONGODB_URI",
-    "start": "node server/index.js",
-    "lint-client:watch": "esw --color -w src/client/**",
-    "lint-server:watch": "esw --color -w src/server/**",
-    "lint:watch": "npm run lint-client:watch && npm run lint-server:watch",
-    "prepublish": "npm run build"
-  },
-  "betterScripts": {
-    "build-server": {
-      "command": "webpack --config dev/webpack2.config.server.js",
-      "env": {
-        "NODE_ENV": "production"
-      }
-    },
-    "build-client": {
-      "command": "webpack --config dev/webpack2.config.client.js",
-      "env": {
-        "NODE_ENV": "production"
-      }
-    },
-    "watch-server": {
-      "command": "better-npm-run build-server --watch --colors"
-    },
-    "watch-client": {
-      "command": "better-npm-run build-client --watch --colors"
-    }
-  },
-  "version": "0.24.0"
+  }
 }

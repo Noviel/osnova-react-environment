@@ -2,9 +2,10 @@
 //
 // Counter react component
 //
-/////////////////////////////////////////////////////////////////
+//=========================================================================
 
 import React, { PropTypes } from 'react';
+import styles from './style.css';
 
 const counterProps = {
   value: PropTypes.number,
@@ -14,9 +15,9 @@ const counterProps = {
 
 const Counter = ({ value, onIncrement, onDecrement}) => (
   <div>
-    <h1>{value}</h1>
-    <button onClick={onIncrement}>+</button>
-    <button onClick={onDecrement}>-</button>
+    <h1 className={styles.label}>{value}</h1>
+    <button className={styles.button} onClick={onIncrement}>+</button>
+    <button className={styles.button} onClick={onDecrement}>-</button>
   </div>
 );
 

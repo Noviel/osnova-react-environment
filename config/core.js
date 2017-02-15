@@ -3,7 +3,7 @@
 
 const { host, database } = require('./target');
 
-const config = {
+module.exports = {
   paths: {
     absolute: {
       root: process.cwd()
@@ -16,5 +16,3 @@ const config = {
     secret: 'VERYSECRETSTRING'
   }
 };
-
-module.exports = config;

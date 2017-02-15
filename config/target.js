@@ -2,7 +2,7 @@
 //
 // deployment to specific platform settings
 //
-/////////////////////////////////////////////////////////////////
+//=========================================================================
 
 const env  = process.env;
 
@@ -15,11 +15,11 @@ const localSettings = {
   },
 
   database: {
-    uri: 'mongodb://localhost/osnova'
+    uri: 'mongodb://localhost/osnovareactenvironment'
   }
 };
 
-/////////////////////////////////////////////////////////////////
+//=========================================================================
 // for development mode in heroku
 // $ heroku config:set NPM_CONFIG_PRODUCTION=false
 const herokuSettings = {
@@ -32,8 +32,7 @@ const herokuSettings = {
 
   database: {
     // https://devcenter.heroku.com/articles/mongolab/
-    // console command:
-    // $ heroku config:get MONGODB_URI -app [your-app-name]
+    // $ heroku config:get MONGODB_URI
     uri: 'mongodb://user:passs@x.mlab.com:33966/user'
   }
 };
