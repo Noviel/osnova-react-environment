@@ -1,5 +1,10 @@
 {
-  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings"
+  ],
   "parser": "babel-eslint",
   "env": {
     "browser": true,
@@ -9,7 +14,16 @@
     "indent": [1, 2, {"SwitchCase": 1}],
     "no-console": 0
   },
+  "settings": {
+    "import/parser": "babel-eslint",
+    "import/resolve": {
+      "moduleDirectory": [
+        "node_modules",
+        "src"
+      ]
+    }
+  },
   "plugins": [
-    "react"
+    "react", "import"
   ]
 }

@@ -14,7 +14,7 @@ const counterProps = {
 };
 
 const Counter = ({ value, onIncrement, onDecrement}) => (
-  <div>
+  <div className={styles.main}>
     <h1 className={styles.label}>{value}</h1>
     <button className={styles.button} onClick={onIncrement}>+</button>
     <button className={styles.button} onClick={onDecrement}>-</button>

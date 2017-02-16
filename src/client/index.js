@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { render } from 'react-dom';
-import Caption from '../components/caption';
+import Caption from '../components/Caption';
 import Counter from '../components/Counter';
 import io from 'socket.io-client';
 

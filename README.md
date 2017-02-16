@@ -5,11 +5,12 @@ Modern ready-to-use environment for quick start of a new react application devel
 
 ##Features
 
+ - ES6+ support
  - Building either a client and a server with transparently configured Webpack
  - Linting on the build stage that enforces best code writing practices
- - Extendable and configurable [osnova](https://github.com/Noviel/osnova) based server
  - Server side rendering with Webpack-React-Redux stack
-
+ - Extendable and configurable [osnova](https://github.com/Noviel/osnova) based server
+ 
 ##Components 
 
  - [react](https://facebook.github.io/react/)
@@ -20,7 +21,7 @@ Modern ready-to-use environment for quick start of a new react application devel
  - [osnova](https://github.com/Noviel/osnova)
  - [osnova-cluster-launcher](https://github.com/Noviel/osnova-cluster-launcher)
  
-##Install
+##Installation
 
 ###Via git:
 
@@ -36,11 +37,17 @@ Modern ready-to-use environment for quick start of a new react application devel
 - Set in `package.json` information about your application.
 - `npm install` or `yarn install` for dependencies.
 
+Note that build folders are excluded from git. You need to
+remove `/server` and `/static/dist` from `.gitignore` to push built version.
+
 ##Launching
 
-    npm run build
-    npm run start
-    
+```sh
+npm run build
+npm run start
+start http://localhost:3322
+```
+
 ##Structure
 
   Coming soon...

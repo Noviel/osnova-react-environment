@@ -1,4 +1,8 @@
 // Created by snov on 11.02.2017.
+//
+// Redux store entry point
+//
+//=========================================================================
 
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';

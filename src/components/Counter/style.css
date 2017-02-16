@@ -1,8 +1,25 @@
-.button {
-    border: solid aliceblue;
+.main {
     display: block;
+    width: 200px;
+    margin: 10px;
+    border: 3px solid aliceblue;
+    background: black;
+}
+
+.button {
+    display: inline-block;
+
+    text-align: center;
+    margin: 5px;
+    min-width: 40px;
+    min-height: 40px;
+    border: 3px solid aliceblue;
+    color: whitesmoke;
+    background: black;
 }
 
 .label {
-
+    display: block;
+    color: honeydew;
+    text-align: center;
 }

@@ -5,9 +5,7 @@
 //=========================================================================
 
 import React from 'react';
-/* eslint-disable no-unused-vars */
-import reactDOM, { renderToString } from 'react-dom/server';
-/* eslint-enable no-unused-vars */
+import reactDOM from 'react-dom/server';
 
 import App from '../../components/App';
 import Html from '../../components/Html';
@@ -18,7 +16,7 @@ const sendHtml = (/*opts*/) => osnova => {
   const app = osnova.express;
 
   app.get('*', (req, res) => {
-    res.send('<!doctype html>\n' + renderToString(<Html assets={ getAssets() } component={<App/>}/>));
+    res.send('<!doctype html>\n' + reactDOM.renderToString(<Html assets={ getAssets() } component={<App/>}/>));
   });
 
   osnova.next();
