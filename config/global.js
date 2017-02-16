@@ -4,8 +4,8 @@
 //
 //=========================================================================
 
-export default function defineGlobals(isOnClient = false) {
+module.exports = function defineGlobals(isOnClient = false) {
   global.__CLIENT__ = isOnClient;
   global.__SERVER__ = !isOnClient;
   global.__DEV__ = process.env.NODE_ENV !== 'production';
-}
+};

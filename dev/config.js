@@ -7,10 +7,12 @@ const config = {
 };
 
 const root = config.paths.absolute.root;
+const distPath = './dist/';
 
 config.paths.output = {
   server: path.resolve(root, './server/'),
-  client: path.resolve(root, config.paths.assets, './dist/')
+  client: path.resolve(root, config.paths.assets, distPath),
+  distPath: distPath
 };
 
 module.exports = config;

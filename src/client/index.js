@@ -54,7 +54,7 @@ const updateApp = () => {
                onDecrement={() => { doDecrement(); }}
       />
     </div>,
-    document.getElementById('app')
+    document.getElementById('counter')
   );
 };
 

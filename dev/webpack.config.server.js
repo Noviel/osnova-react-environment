@@ -7,18 +7,18 @@
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 
-const postCss = require('./webpack/features/postcss')('server', { });
 const eslintBabelRule = require('./webpack/features/eslint-babel');
 const imagesRule = require('./webpack/features/images');
-const configure = require('./webpack-configurator').configure;
+const postCss = require('./webpack/features/postcss')('server');
+const { configure } = require('./webpack-utils');
 
 const config = require('./config');
 const rootPath = config.paths.absolute.root;
 const assetsPath = config.paths.output.server;
 
 module.exports = configure({
+  isProduction: process.env.NODE_ENV === 'production',
   production: {
-    use: process.env.NODE_ENV === 'production',
     plugins: require('./webpack/features/production-plugins')
   }
 }, {
@@ -34,7 +34,6 @@ module.exports = configure({
     path: assetsPath,
     publicPath: '/'
   },
-
 
   module: {
     rules: [

@@ -56,8 +56,7 @@ module.exports = function (target, opts) {
       filename: '[name].[contenthash].css',
       disable: false,
       allChunks: true
-    }),
-
+    })
   }
 
 };

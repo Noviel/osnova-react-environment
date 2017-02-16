@@ -7,6 +7,7 @@ import expressMiddlewares from './modules/express-middlewares';
 import socketIOModule from 'osnova-module-socket.io';
 
 //import socketAuth from './socketio/auth';
+require('../../config/global')(false);
 
 module.exports = (listen) => {
 
