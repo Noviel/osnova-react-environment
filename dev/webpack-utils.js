@@ -7,19 +7,7 @@ const path = require('path');
 const fs = require('fs');
 
 const config = require('./config');
-
-/*
-function merge(target, array) {
-  let result = [];
-  if (target && target.length >= 1) {
-    result = [].concat.apply([], target);
-  }
-  if (array && array.length >= 1) {
-    result = [].concat.apply([], result, array);
-  }
-  return result;
-}
-*/
+const deepmerge = require('deepmerge');
 
 function flatten(arr) {
   return arr.reduce(function (flat, toFlatten) {
@@ -27,12 +15,11 @@ function flatten(arr) {
   }, []);
 }
 
+const EmptyPlugin = () => {};
 
 function getFileExtenstion(filename) {
   return filename.split('.').pop();
 }
-
-const EmptyPlugin = () => {};
 
 const defaultProductionCheck = (value) => {
   if (typeof value == 'undefined')
@@ -49,54 +36,76 @@ const onlyProductionPlugin = (plugins, isProduction) => {
 };
 
 
-function configureWebpack(opts, webpackOpts) {
+function configure(opts, webpackOpts) {
   opts = opts || {};
 
-  const webpackObject = Object.assign({}, webpackOpts);
+  let webpackObject = Object.assign({}, webpackOpts);
   webpackObject.context = config.paths.absolute.root;
 
   if (webpackObject.plugins && webpackObject.plugins.length >= 1) {
     webpackObject.plugins = flatten(webpackObject.plugins);
   }
 
+  const features = opts.features;
+  if (features && features.length >= 1) {
+    for (let f in features) {
+      if (features.hasOwnProperty(f) && typeof features[f] == 'function') {
+        const feature = features[f]();
+        console.log(`Adding feature: ${feature}`);
+        webpackObject = deepmerge(webpackObject, feature);
+      }
+    }
+  }
+
+  console.log(webpackObject);
+
   return webpackObject;
 }
 
 function getAssets() {
   const manifest = JSON.parse(fs.readFileSync(path.resolve(config.paths.output.client, 'manifest.json'), 'utf8'));
+  const distPath = config.paths.output.dist;
   const assets = {
-    distPath: config.paths.output.distPath,
     scripts: [],
     styles: [],
     other: []
   };
 
-  for (let a in manifest) {
-    if (!manifest.hasOwnProperty(a)) continue;
+  for (let v in manifest) {
+    if (!manifest.hasOwnProperty(v)) continue;
 
-    const asset = manifest[a];
+    const asset = manifest[v];
     const ext = getFileExtenstion(asset);
+    const fullName = distPath + asset;
+
     if (ext.match(/jsx?/)) {
-      assets.scripts.push(asset)
+      assets.scripts.push(fullName);
     } else if (ext.match(/css/)) {
-      assets.styles.push(asset);
+      assets.styles.push(fullName);
     } else
-      assets.other.push(asset)
+      assets.other.push(fullName)
   }
 
   return assets;
 }
 
-const mergeExclude = (merge, exclude, list) => {
-
+const defaultEntryName = 'main';
+const mergeOrExclude = (merge, exclude, list) => {
   let result = {};
+
+  if (typeof list == 'string') return list;
 
   for (let entry in list) {
     if (!list.hasOwnProperty(entry) || entry == exclude) continue;
     if (entry == merge) {
-      for (let subEntry in list[entry]) {
-        if (list[entry].hasOwnProperty(subEntry))
-          result[subEntry] = list[entry][subEntry];
+      if (typeof list[entry] == 'string') {
+        result[defaultEntryName] = list[entry];
+      } else {
+        for (let subEntry in list[entry]) {
+          if (list[entry].hasOwnProperty(subEntry)) {
+            result[subEntry] = list[entry][subEntry];
+          }
+        }
       }
     } else {
       result[entry] = list[entry];
@@ -106,10 +115,15 @@ const mergeExclude = (merge, exclude, list) => {
   return result;
 };
 
-const mergeExcludeEntries = (list, production) => {
+const conditionalEntry = (entries, isProduction) => {
+  if (!entries) return {};
+
+  isProduction = typeof isProduction !== 'undefined' ?
+    isProduction : defaultProductionCheck(isProduction);
+
   let merge, exclude;
 
-  if (production) {
+  if (isProduction) {
     merge = '__prod__';
     exclude = '__dev__';
   } else {
@@ -117,21 +131,28 @@ const mergeExcludeEntries = (list, production) => {
     exclude = '__prod__';
   }
 
-  return mergeExclude(merge, exclude, list);
-};
-
-const conditionalEntries = (opts, isProduction) => {
-  opts = opts || {};
-  isProduction = defaultProductionCheck(isProduction);
-
-  if (isProduction) return mergeExcludeEntries(opts, true);
-
-  return mergeExcludeEntries(opts, false);
+  return mergeOrExclude(merge, exclude, entries);
 };
 
 module.exports = {
-  configure: configureWebpack,
-  getAssets: getAssets,
-  onlyProductionPlugin: onlyProductionPlugin,
-  entries: conditionalEntries
+  configure,
+  getAssets,
+  onlyProductionPlugin,
+  conditionalEntry,
+  flatten,
+
+  setEntry: (args) => () => {
+    return {
+      entry: conditionalEntry(args)
+    };
+  },
+
+  setRules: (args) => () => {
+    return {
+      module: {
+        rules: args
+      }
+    }
+  }
+
 };

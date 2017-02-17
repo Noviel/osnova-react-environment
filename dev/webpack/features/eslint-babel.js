@@ -1,11 +1,11 @@
 // Created by snov on 15.02.2017.
 //
-// ABOUT THIS FILE
+// Babel-Eslint loader object
 //
 //=========================================================================
 
 module.exports = {
   test: /\.jsx?$/,
   exclude:/ node_modules/,
-  loader: ['babel-loader','eslint-loader']
+  loader: ['babel-loader', 'eslint-loader']
 };

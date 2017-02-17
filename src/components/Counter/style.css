@@ -1,6 +1,6 @@
 .main {
-    display: block;
-    width: 200px;
+    display: inline-block;
+    width: auto;
     margin: 10px;
     border: 3px solid aliceblue;
     background: black;
@@ -20,6 +20,7 @@
 
 .label {
     display: block;
+    margin: 10px;
     color: honeydew;
     text-align: center;
 }

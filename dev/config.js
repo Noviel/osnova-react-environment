@@ -12,7 +12,7 @@ const distPath = './dist/';
 config.paths.output = {
   server: path.resolve(root, './server/'),
   client: path.resolve(root, config.paths.assets, distPath),
-  distPath: distPath
+  dist: distPath
 };
 
 module.exports = config;

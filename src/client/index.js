@@ -28,8 +28,7 @@ const initSocket = () => {
     } else {
       console.log(`Unsupported payload ${payload}`);
     }
-  })
-
+  });
 };
 
 const doIncrement = () => {
@@ -39,7 +38,6 @@ const doIncrement = () => {
 const doDecrement = () => {
   socket.emit('counter-decrement');
 };
-
 
 const store = createStore({
   counter: 100

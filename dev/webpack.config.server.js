@@ -10,7 +10,7 @@ const nodeExternals = require('webpack-node-externals');
 const eslintBabelRule = require('./webpack/features/eslint-babel');
 const imagesRule = require('./webpack/features/images');
 const postCss = require('./webpack/features/postcss')('server');
-const { configure } = require('./webpack-utils');
+const { configure, setEntry, setRules } = require('./webpack-utils');
 
 const config = require('./config');
 const rootPath = config.paths.absolute.root;
@@ -20,14 +20,14 @@ module.exports = configure({
   isProduction: process.env.NODE_ENV === 'production',
   production: {
     plugins: require('./webpack/features/production-plugins')
-  }
+  },
+  features: [
+    setEntry({ __dev__: './src/server/index.js' }),
+    setRules([eslintBabelRule, postCss.rule, imagesRule])
+  ]
 }, {
   devtool: 'source-map',
   target: 'node',
-
-  entry: {
-    index: './src/server/index.js'
-  },
 
   output: {
     filename: '[name].js',
@@ -35,16 +35,9 @@ module.exports = configure({
     publicPath: '/'
   },
 
-  module: {
-    rules: [
-      eslintBabelRule, postCss.rule, imagesRule
-    ]
-  },
-
   externals: [nodeExternals()],
 
   plugins: [
     new CleanWebpackPlugin([assetsPath], { root: rootPath })
   ]
-
 });

@@ -3,6 +3,7 @@
 // Webpack plugins to use for production build
 //
 //=========================================================================
+
 const webpack = require('webpack');
 
 module.exports = [
