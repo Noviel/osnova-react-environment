@@ -22,7 +22,7 @@ module.exports = configure({
     plugins: require('./webpack/features/production-plugins')
   },
   features: [
-    setEntry({ __dev__: './src/server/index.js' }),
+    setEntry('./src/server/index.js'),
     setRules([eslintBabelRule, postCss.rule, imagesRule])
   ]
 }, {

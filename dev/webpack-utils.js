@@ -50,14 +50,10 @@ function configure(opts, webpackOpts) {
   if (features && features.length >= 1) {
     for (let f in features) {
       if (features.hasOwnProperty(f) && typeof features[f] == 'function') {
-        const feature = features[f]();
-        console.log(`Adding feature: ${feature}`);
-        webpackObject = deepmerge(webpackObject, feature);
+        webpackObject = deepmerge(webpackObject, features[f]());
       }
     }
   }
-
-  console.log(webpackObject);
 
   return webpackObject;
 }
@@ -85,6 +81,13 @@ function getAssets() {
     } else
       assets.other.push(fullName)
   }
+
+  // we need `index.js` to be the last one and `manifest.js` the first one.
+  assets.scripts.sort((left, right) => {
+    if (left.match(/index/) || right.match(/manifest/)) return 1;
+    if (left.match(/manifest/) || right.match(/index/)) return -1;
+    return 0;
+  });
 
   return assets;
 }
