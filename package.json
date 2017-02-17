@@ -13,7 +13,7 @@
   ],
   "author": "Aleksandr Snov <snov.contact@gmail.com>",
   "license": "MIT",
-  "main": "server/index.js",
+  "main": "server/main.js",
   "readme": "README.md",
   "repository": {
     "type": "git",
@@ -69,7 +69,6 @@
     "cookie-parser": "^1.4.3",
     "osnova": "^0.31.5",
     "osnova-cluster-launcher": "^1.11.15",
-    "osnova-lib": "^2.0.2",
     "osnova-module-socket.io": "^0.4.5",
     "passport": "^0.3.2",
     "passport.socketio": "^3.7.0",
