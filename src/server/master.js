@@ -7,7 +7,7 @@ import { stringsToObjectKeys } from '../utils/core';
 const masterCoreOpts = {...require('../../config/core')};
 
 // we dont need these core modules on the master process
-const modules = stringsToObjectKeys(['webserver', 'session'], false);
+const modules = stringsToObjectKeys(['webserver'], false);
 masterCoreOpts.modules = {...masterCoreOpts.modules, ...modules};
 
 module.exports = (listen) => {

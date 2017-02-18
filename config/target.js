@@ -11,7 +11,7 @@ const localSettings = {
   threads: 1,//require('os').cpus().length,
 
   host: {
-    port: env.NODE_PORT || 3322,
+    port: env.NODE_PORT || 3323,
     ip: env.NODE_IP || '127.0.0.1'
   },
 
