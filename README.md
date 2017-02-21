@@ -3,6 +3,8 @@
 ##bI?
 Modern ready-to-use environment for quick start of a new react application development.
 
+Inspired by and based on [React Redux Universal Hot Example](https://github.com/erikras/react-redux-universal-hot-example)
+
 ##Features
 
  - ES6+ support
